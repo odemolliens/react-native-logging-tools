@@ -1,0 +1,38 @@
+{
+  "name": "react-native-logging",
+  "title": "Arhs - Custom React Native Logging",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github_account/react-native-arhs-react-native-logging.git",
+    "baseUrl": "https://github.com/github_account/react-native-arhs-react-native-logging"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "",
+  "license": "",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x",
+    "reactotron-react-native": ">=4.0.0",
+    "reactotron-redux": ">=3.0.0"
+  },
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5",
+    "reactotron-react-native": "4.0.2",
+    "reactotron-redux": "^3.1.2",
+    "ts-jest": "^25.0.0",
+    "tslint": "^6.0.0",
+    "tslint-config-airbnb-base": "^0.3.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.2.0",
+    "typescript": "^3.7.3"
+  }
+}

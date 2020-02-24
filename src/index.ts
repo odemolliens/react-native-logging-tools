@@ -1,0 +1,2 @@
+
+export { setupReactotron } from './reactotron';
