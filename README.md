@@ -1,4 +1,4 @@
-# react-native-arhs-react-native-logging
+# react-native-logging
 
 ## Getting started
 

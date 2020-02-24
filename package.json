@@ -1,15 +1,10 @@
 {
   "name": "react-native-logging",
-  "title": "Arhs - Custom React Native Logging",
+  "title": "Custom React Native Logging",
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/github_account/react-native-arhs-react-native-logging.git",
-    "baseUrl": "https://github.com/github_account/react-native-arhs-react-native-logging"
   },
   "keywords": [
     "react-native"
