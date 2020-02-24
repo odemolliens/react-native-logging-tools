@@ -2,16 +2,21 @@
 
 ## Getting started
 
-`$ npm install react-native-arhs-react-native-logging --save`
+`$ yarn add react-native-logging`
 
-### Mostly automatic installation
+or
 
-`$ react-native link react-native-arhs-react-native-logging`
+`$ npm install react-native-logging`
 
 ## Usage
-```javascript
-import ArhsReactNativeLogging from 'react-native-arhs-react-native-logging';
 
-// TODO: What to do with the module?
-ArhsReactNativeLogging;
+### Reactotron
+
+
+```javascript
+import { setupReactotron } from 'react-native-logging';
+
+{...}
+
+const store = createStore(rootReducer, compose(..., setupReactotron('APP_NAME').createEnhancer()));
 ```
