@@ -1,7 +1,7 @@
-#import "ArhsReactNativeLogging.h"
+#import "ReactNativeLogging.h"
 
 
-@implementation ArhsReactNativeLogging
+@implementation ReactNativeLogging
 
 RCT_EXPORT_MODULE()
 

@@ -10,10 +10,10 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
 
-public class ArhsReactNativeLoggingPackage implements ReactPackage {
+public class ReactNativeLoggingPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new ArhsReactNativeLoggingModule(reactContext));
+        return Arrays.<NativeModule>asList(new ReactNativeLoggingModule(reactContext));
     }
 
     @Override
