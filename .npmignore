@@ -1,0 +1,11 @@
+.vscode
+coverage
+build
+ios
+android
+scripts
+node_modules
+shell
+.watchmanconfig
+.eslintignore
+README.md
