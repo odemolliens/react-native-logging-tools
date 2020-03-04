@@ -1,3 +1,7 @@
 export const createFirebaseLogger = (Firebase: any) => (event: string, params: any = {}) => {
-  Firebase.logEvent(event, params);
+  try {
+    Firebase.logEvent(event, params);
+  } catch (error) {
+    console.log('Error: Unable to tag firebase analytics event:', error);
+  }
 };
