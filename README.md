@@ -39,8 +39,14 @@ initLogging({
 Reactotron,
 reactotronRedux,
 }, [createFirebaseLogger(analytics())]);
+
 {...}
+
 const store = createStore(rootReducer, compose(..., setupReactotronWithRedux('APP_NAME').createEnhancer()));
+
+{...}
+
+logEvent('EVENT_NAME', { your_key: 'value' });
 ```
 With Sentry & without reactotron & redux
 ```javascript
