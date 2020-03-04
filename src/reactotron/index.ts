@@ -1,8 +1,14 @@
-import Reactotron from 'reactotron-react-native';
-import { reactotronRedux } from 'reactotron-redux';
+import { IReactotron } from '../model/config';
 
-export const setupReactotron = (appName: string) =>
-  Reactotron.configure({ name: appName })
+export function reactotron(Reactotron: any, appName: string): IReactotron {
+  return Reactotron.configure({ name: appName })
+    .useReactNative()
+    .connect();
+}
+
+export function reactotronWithRedux(Reactotron: any, reactotronRedux: any, appName: string): IReactotron {
+  return Reactotron.configure({ name: appName })
     .use(reactotronRedux())
     .useReactNative()
     .connect();
+}
