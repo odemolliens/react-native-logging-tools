@@ -10,8 +10,7 @@ assignees: imranMnts
 Description:
 
     Please provide a clear and concise description of what the bug is. Include screenshots if needed.
-    Please test using the latest version to make sure your issue has not already been fixed: 
-
+    Please test using the latest version to make sure your issue has not already been fixed.
 
 ## Steps To Reproduce
 
