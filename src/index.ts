@@ -5,9 +5,9 @@ import { IConfig, IReactotron } from './model/config';
 let Reactotron: any;
 let reactotronRedux: any;
 
-let loggers: Array<any>;
+const loggers: Array<Function> = [];
 
-export default function init(config: IConfig, functionsList: Array<any>) {
+export default function init(config: IConfig, createdLoggers: Array<Function>) {
   if (config.Reactotron) {
     Reactotron = config.Reactotron;
   }
@@ -15,7 +15,11 @@ export default function init(config: IConfig, functionsList: Array<any>) {
     reactotronRedux = config.reactotronRedux;
   }
 
-  loggers = functionsList;
+  for (const logger of createdLoggers) {
+    if (isFunction(logger)) {
+      loggers.push(logger);
+    }
+  }
 }
 
 export function setupReactotron(appName: string): IReactotron {
