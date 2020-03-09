@@ -1,7 +1,7 @@
 export const createSentryLogger = (Sentry: any, config: any) => {
   Sentry.init({ dsn: config.dsn });
   // @ts-ignore
-  return (event: string, params: any = {}) => {
+  return (event: string, params: any) => {
     try {
       Sentry.captureMessage(event);
     } catch (error) {
