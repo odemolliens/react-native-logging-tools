@@ -6,7 +6,7 @@
  * @param func object to check
  * @return return true if it's a function, otherwise return false
  */
-const isFunction = (func: any) =>
+export const isFunction = (func: any) =>
   func &&
   (Object.prototype.toString.call(func) === '[object Function]' ||
     'function' === typeof func ||

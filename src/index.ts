@@ -1,6 +1,7 @@
 import { reactotron, reactotronWithRedux } from './reactotron';
 import { createFirebaseLogger, createSentryLogger } from './loggers';
 import { IConfig, IReactotron } from './model/config';
+import { isFunction } from './helpers/functions';
 
 let Reactotron: any;
 let reactotronRedux: any;

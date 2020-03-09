@@ -74,10 +74,10 @@ initLogging({}, [createSentryLogger(Sentry)]);
 
 #### Usage
 
-`Reactotron`=> to add to redux store
-```javascript
-{...}
+##### Reactotron
 
+If you initialized Reactotron (and/or reactotronRedux), you can plug it to your redux store
+```javascript
 const store = createStore(
   rootReducer,
   compose(
@@ -87,14 +87,18 @@ OR
     setupReactotronWithRedux('APP_NAME').createEnhancer()
   )
 );
-
-{...}
 ```
 
-`Loggers` => to call where do you want/need
+##### Loggers
+
+###### Events
+
+You can call this function where do you want/need to send logs to each plugged libraries
 ```javascript
 logEvent('EVENT_NAME', { your_key: 'value' });
 ```
+
+If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
 
 
 ### Implemented libraries
@@ -105,7 +109,7 @@ Need to add `@react-native-firebase/app` and `@react-native-firebase/analytics` 
 
 To be able to send log to firebase analytics each time when you will call our `logEvent`, you need to add `createFirebaseLogger` to our `initLogging`'s second parameter which take an array.
 
-`createFirebaseLogger` take one parameter, you have to add it `analytics()`from `@react-native-firebase/analytics`
+`createFirebaseLogger` take one parameter, you have to add it `analytics()` from `@react-native-firebase/analytics`
 
 #### Sentry
 
@@ -113,7 +117,7 @@ Need to add `@sentry/react-native` to your project and follow their documentatio
 
 To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `initLogging`'s second parameter which take an array.
 
-`createSentryLogger` take two parameters, you have to add it `Sentry`from `@sentry/react-native` and sentry config object:
+`createSentryLogger` take two parameters, you have to add it `Sentry` from `@sentry/react-native` and sentry config object:
 ```javascript
 {
     dsn: 'YOUR_DSN',
