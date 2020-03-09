@@ -21,11 +21,11 @@ or
 
 ## Status
 
-|Library             |Supported        
-|----------------|-------------|
-|Firebase|:white_check_mark:|
-|Sentry|:white_check_mark:|
-|Adobbe|:x:|
+|Library             |Supported        |Supported versions
+|----------------|-------------|-------------|
+|Firebase|:white_check_mark:| \>= 6.3.4
+|Sentry|:white_check_mark:| \>= 1.3.0
+|Adobe|:x:|
 
 
 ## Usage
