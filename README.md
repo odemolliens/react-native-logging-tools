@@ -1,6 +1,7 @@
 # react-native-logging
 
 - [Getting started](#getting-started)
+- [Status](#status)
 - [Usage](#usage)
     - [Imports](#imports)
     - [How to use](#how-to-use)
@@ -18,6 +19,15 @@ or
 
 `$ npm install react-native-logging`
 
+## Status
+
+|Library             |Supported        
+|----------------|-------------|
+|Firebase|:white_check_mark:|
+|Sentry|:white_check_mark:|
+|Adobbe|:x:|
+
+
 ## Usage
 
 ### Imports
@@ -33,7 +43,7 @@ import initLogging, {
 } from 'react-native-logging';
 ```
 
-In this example, we will use reactotron with redux and firebase analytics.
+And the others if you want to plug to our library.
 ```javascript
 import Reactotron from 'reactotron-react-native';
 import {reactotronRedux} from 'reactotron-redux';
