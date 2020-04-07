@@ -1,7 +1,7 @@
 export interface IConfig {
   Reactotron?: any;
   reactotronRedux?: any;
-  asyncStorage?: any;
+  AsyncStorage?: any;
 }
 
 export interface IReactotron {

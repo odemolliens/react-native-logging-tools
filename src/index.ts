@@ -5,7 +5,7 @@ import { isFunction } from './helpers/functions';
 
 let Reactotron: any;
 let reactotronRedux: any;
-let asyncStorage: any;
+let AsyncStorage: any;
 
 const loggers: Function[] = [];
 
@@ -16,8 +16,8 @@ export default function init(config: IConfig, createdLoggers: Function[]): void 
   if (config.reactotronRedux) {
     reactotronRedux = config.reactotronRedux;
   }
-  if (config.asyncStorage) {
-    asyncStorage = config.asyncStorage;
+  if (config.AsyncStorage) {
+    AsyncStorage = config.AsyncStorage;
   }
 
   for (const logger of createdLoggers) {
@@ -28,11 +28,11 @@ export default function init(config: IConfig, createdLoggers: Function[]): void 
 }
 
 export function setupReactotron(appName: string): IReactotron {
-  return reactotron(Reactotron, asyncStorage, appName);
+  return reactotron(Reactotron, AsyncStorage, appName);
 }
 
 export function setupReactotronWithRedux(appName: string): IReactotron {
-  return reactotronWithRedux(Reactotron, asyncStorage, reactotronRedux, appName);
+  return reactotronWithRedux(Reactotron, AsyncStorage, reactotronRedux, appName);
 }
 
 export function logEvent(event: string, params: any = {}) {

@@ -49,6 +49,7 @@ import Reactotron from 'reactotron-react-native';
 import {reactotronRedux} from 'reactotron-redux';
 import analytics from '@react-native-firebase/analytics';
 import * as Sentry from "@sentry/react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 ```
 
 ### How to use
@@ -65,6 +66,7 @@ With reactotron, redux & firebase
 initLogging({
 Reactotron,
 reactotronRedux,
+asyncStorage: AsyncStorage,
 }, [createFirebaseLogger(analytics())]);
 ```
 Only Sentry
