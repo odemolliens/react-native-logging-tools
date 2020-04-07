@@ -32,7 +32,7 @@ export function setupReactotron(appName: string): IReactotron {
 }
 
 export function setupReactotronWithRedux(appName: string): IReactotron {
-  return reactotronWithRedux(Reactotron, AsyncStorage, reactotronRedux, appName);
+  return reactotronWithRedux(Reactotron, reactotronRedux, AsyncStorage, appName);
 }
 
 export function logEvent(event: string, params: any = {}) {

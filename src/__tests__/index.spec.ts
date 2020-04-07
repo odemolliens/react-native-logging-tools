@@ -14,9 +14,11 @@ describe('Firebasetions test suite', () => {
     init: jest.fn(),
     captureMessage: jest.fn(),
   };
+  const AsyncStorage = jest.fn();
   const reactotronRedux = jest.fn();
   const Reactotron = {
     configure: () => Reactotron,
+    setAsyncStorageHandler: () => Reactotron,
     useReactNative: () => Reactotron,
     use: () => Reactotron,
     connect: () => Reactotron,
@@ -34,7 +36,7 @@ describe('Firebasetions test suite', () => {
   });
 
   it('should init properly with bad initialization', () => {
-    initLogging({ Reactotron, reactotronRedux }, [
+    initLogging({ Reactotron, reactotronRedux, AsyncStorage }, [
       createFirebaseLogger({}),
       createSentryLogger({ init: jest.fn }, { dsn: 'dsn' }),
     ]);
