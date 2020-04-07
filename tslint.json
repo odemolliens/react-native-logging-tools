@@ -17,7 +17,8 @@
       "severity": "error"
     },
     "object-literal-key-quotes": false,
-    "no-console": true,
+    "no-console": false,
+    "ban-types": false,
     "member-access": false,
     "array-type": false,
     "arrow-parens": [

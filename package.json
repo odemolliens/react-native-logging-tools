@@ -5,8 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "lint:fix": "tslint -p tsconfig.json --fix 'src/**/*.tsx' 'src/**/*.ts'",
-    "precommit": "yarn run prettier:fix && yarn run lint:fix && yarn run tsc",
-    "prettier:fix": "prettier --config ./.prettierrc.js --write --check \"src/**/*.ts\" --check \"src/**/*.tsx\" ",
+    "precommit": "yarn run lint:fix && yarn run tsc",
     "test": "jest",
     "testu": "node_modules/.bin/jest --updateSnapshot --i",
     "tsc": "tsc"

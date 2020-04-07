@@ -6,9 +6,9 @@ import { isFunction } from './helpers/functions';
 let Reactotron: any;
 let reactotronRedux: any;
 
-const loggers: Array<Function> = [];
+const loggers: Function[] = [];
 
-export default function init(config: IConfig, createdLoggers: Array<Function>) {
+export default function init(config: IConfig, createdLoggers: Function[]): void {
   if (config.Reactotron) {
     Reactotron = config.Reactotron;
   }
