@@ -1,5 +1,5 @@
 import { reactotron, reactotronWithRedux } from './reactotron';
-import { createFirebaseLogger, createSentryLogger } from './loggers';
+import { createFirebaseLogger, createSentryLogger, createCrashlyticsLogger } from './loggers';
 import { IConfig, IReactotron } from './model/config';
 import { isFunction } from './helpers/functions';
 
@@ -8,8 +8,9 @@ let reactotronRedux: any;
 let AsyncStorage: any;
 
 const loggers: Function[] = [];
+const recordErrors: Function[] = [];
 
-export default function init(config: IConfig, createdLoggers: Function[]): void {
+export default function init(config: IConfig, createdLoggers: Function[] = [], createdErrors: Function[] = []): void {
   if (config.Reactotron) {
     Reactotron = config.Reactotron;
   }
@@ -23,6 +24,12 @@ export default function init(config: IConfig, createdLoggers: Function[]): void 
   for (const logger of createdLoggers) {
     if (isFunction(logger)) {
       loggers.push(logger);
+    }
+  }
+
+  for (const logger of createdErrors) {
+    if (isFunction(logger)) {
+      recordErrors.push(logger);
     }
   }
 }
@@ -41,4 +48,10 @@ export function logEvent(event: string, params: any = {}) {
   }
 }
 
-export { createFirebaseLogger, createSentryLogger };
+export function recordError(event: string, params: any = {}) {
+  for (const record of recordErrors) {
+    record(event, params);
+  }
+}
+
+export { createFirebaseLogger, createSentryLogger, createCrashlyticsLogger };

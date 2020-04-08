@@ -36,6 +36,7 @@ To start, you have to import libraries which will be used.
 ```javascript
 import initLogging, {
   createFirebaseLogger,
+  createCrashlyticsLogger,
   createSentryLogger,
   setupReactotron,
   setupReactotronWithRedux,
@@ -48,6 +49,7 @@ And the others if you want to plug to our library.
 import Reactotron from 'reactotron-react-native';
 import {reactotronRedux} from 'reactotron-redux';
 import analytics from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
 import * as Sentry from "@sentry/react-native";
 import AsyncStorage from '@react-native-community/async-storage';
 ```
@@ -60,6 +62,7 @@ Before any call to `react-native-logging`'s features, you have to initialize it.
 Librarie's initialization function take two parameters `initLogging(config, loggers)`:
 - `config: IConfig`: IConfig is an object which takes `Reactotron` and `reactotronRedux` as parameters. Need to pass reactotron's libraries to be able to use it later.
 - `loggers: Array<Function>`: array of function, functions imported from this library to send log to use libraries like firebase, sentry..
+- `recordErrors: Array<Function>`: array of function, functions imported from this library to record error to use libraries like crashlytics..
 
 With reactotron, redux & firebase
 ```javascript
@@ -102,10 +105,25 @@ logEvent('EVENT_NAME', { your_key: 'value' });
 
 If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
 
+###### Errors
+
+You can call this function where do you want/need to send logs to each plugged libraries
+```javascript
+recordError('EVENT_NAME', { your_key: 'value' });
+```
+
 
 ### Implemented libraries
 
-#### Firebase
+#### Firebase crashlytics
+
+Need to add `@react-native-firebase/app` and `@react-native-firebase/crashlytics` to your project and follow their documentations to setup them properly.
+
+To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `initLogging`'s thrid parameter which take an array.
+
+`createCrashlyticsLogger` take one parameter, you have to add it `crashlytics()` from `@react-native-firebase/crashlytics`
+
+#### Firebase analytics
 
 Need to add `@react-native-firebase/app` and `@react-native-firebase/analytics` to your project and follow their documentations to setup them properly.
 

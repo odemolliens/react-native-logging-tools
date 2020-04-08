@@ -4,13 +4,19 @@ import initLogging, {
   setupReactotronWithRedux,
   setupReactotron,
   logEvent,
+  createCrashlyticsLogger,
+  recordError,
 } from '../index';
 
-describe('Firebasetions test suite', () => {
-  const Firebase = {
+describe('index test suite', () => {
+  const analytics = {
     logEvent: jest.fn(),
   };
-  const Sentry = {
+  const crashlytics = {
+    recordError: jest.fn(),
+    setAttributes: jest.fn(),
+  };
+  const sentry = {
     init: jest.fn(),
     captureMessage: jest.fn(),
   };
@@ -27,63 +33,88 @@ describe('Firebasetions test suite', () => {
   };
 
   it('should init properly', () => {
+    initLogging({});
+  });
+
+  it('should init properly', () => {
     initLogging({}, []);
   });
 
   it('should init properly', () => {
     // @ts-ignore
-    initLogging({}, [{}]);
+    initLogging({}, [{}], [{}]);
   });
 
   it('should init properly with bad initialization', () => {
-    initLogging({ Reactotron, reactotronRedux, AsyncStorage }, [
-      createFirebaseLogger({}),
-      createSentryLogger({ init: jest.fn }, { dsn: 'dsn' }),
-    ]);
+    initLogging(
+      { Reactotron, reactotronRedux, AsyncStorage },
+      [createFirebaseLogger({}), createSentryLogger({ init: jest.fn }, { dsn: 'dsn' })],
+      [createCrashlyticsLogger({})],
+    );
   });
 
-  it('should init properly with loggers', () => {
-    initLogging({ Reactotron, reactotronRedux }, [
-      createFirebaseLogger(Firebase),
-      createSentryLogger(Sentry, { dsn: 'dsn' }),
-    ]);
+  it('should init properly loggers and errors', () => {
+    initLogging(
+      { Reactotron, reactotronRedux },
+      [createFirebaseLogger(analytics), createSentryLogger(sentry, { dsn: 'dsn' })],
+      [createCrashlyticsLogger(crashlytics)],
+    );
   });
 
   it('should init properly with sentry', () => {
     initLogging({ Reactotron, reactotronRedux }, [
-      createFirebaseLogger(Firebase),
-      createSentryLogger(Sentry, { dsn: 'dsn' }),
+      createFirebaseLogger(analytics),
+      createSentryLogger(sentry, { dsn: 'dsn' }),
     ]);
   });
 
   it('should init properly and log', () => {
     initLogging({ Reactotron, reactotronRedux }, [
-      createFirebaseLogger(Firebase),
-      createSentryLogger(Sentry, { dsn: 'dsn' }),
+      createFirebaseLogger(analytics),
+      createSentryLogger(sentry, { dsn: 'dsn' }),
+    ]);
+    logEvent('event', { key: 'value' });
+  });
+
+  it('should init properly and log', () => {
+    initLogging({ Reactotron, reactotronRedux }, [
+      createFirebaseLogger(analytics),
+      createSentryLogger(sentry, { dsn: 'dsn' }),
     ]);
     logEvent('event', { key: 'value' });
   });
 
   it('should init properly and log without param', () => {
     initLogging({ Reactotron, reactotronRedux }, [
-      createFirebaseLogger(Firebase),
-      createSentryLogger(Sentry, { dsn: 'dsn' }),
+      createFirebaseLogger(analytics),
+      createSentryLogger(sentry, { dsn: 'dsn' }),
     ]);
     logEvent('event');
   });
 
+  it('should init properly and record error', () => {
+    initLogging({ Reactotron, reactotronRedux }, [], [createCrashlyticsLogger(crashlytics)]);
+    recordError('error', { key: 'value' });
+  });
+
+  it('should init properly and record error without param', () => {
+    initLogging({ Reactotron, reactotronRedux }, [], [createCrashlyticsLogger(crashlytics)]);
+    recordError('error');
+  });
+
   it('should init properly and setup reactotron', () => {
     initLogging({ Reactotron, reactotronRedux }, [
-      createFirebaseLogger(Firebase),
-      createSentryLogger(Sentry, { dsn: 'dsn' }),
+      createFirebaseLogger(analytics),
+      createSentryLogger(sentry, { dsn: 'dsn' }),
     ]);
     setupReactotron('app_name');
   });
 
   it('should init properly and setup reactotron and redux', () => {
     initLogging({ Reactotron, reactotronRedux }, [
-      createFirebaseLogger(Firebase),
-      createSentryLogger(Sentry, { dsn: 'dsn' }),
+      createFirebaseLogger(analytics),
+      createCrashlyticsLogger(crashlytics),
+      createSentryLogger(sentry, { dsn: 'dsn' }),
     ]);
     setupReactotronWithRedux('app_name');
   });
