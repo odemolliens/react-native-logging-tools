@@ -18,9 +18,9 @@
   "license": "",
   "readmeFilename": "README.md",
   "peerDependencies": {
-    "@react-native-firebase/analytics": ">=6.3.4",
-    "@react-native-firebase/crashlytics": ">=6.3.4",
-    "@react-native-firebase/app": ">=6.3.4",
+    "@react-native-firebase/analytics": ">=6.0.0",
+    "@react-native-firebase/app": ">=6.0.0",
+    "@react-native-firebase/crashlytics": ">=6.0.0",
     "@sentry/react-native": ">=1.3.0",
     "react": "^16.8.1",
     "react-native": ">=0.60.0-rc.0 <1.0.x",
@@ -68,10 +68,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 100.00,
-        "branches": 100.00,
-        "functions": 100.00,
-        "lines": 100.00
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
       }
     },
     "snapshotSerializers": [

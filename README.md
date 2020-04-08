@@ -1,5 +1,13 @@
 # react-native-logging
 
+A react native module that lets you to:
+ - Connect your app to reactotron easily
+ - Plug many analytics libraries and send data to everyone every time
+ - Plug many crash reporter libraries and send error event to everyone every time
+ - Register a global error handler which will capture fatal JS exceptions and send a report to your crash reporter libraries
+
+and all this, as easily as possible
+
 - [Getting started](#getting-started)
 - [Status](#status)
 - [Usage](#usage)
@@ -8,7 +16,8 @@
         - [Initialization](#initialization)
         - [Usage](#usage)
     - [Implemented libraries](#implemented-libraries)
-        - [Firebase](#firebase)
+        - [Firebase crashlytics](#firebase-crashlytics)
+        - [Firebase analytics](#firebase-analytics)
         - [Sentry](#sentry)
 
 ## Getting started
@@ -19,12 +28,13 @@ or
 
 `$ npm install react-native-logging`
 
-## Status
+## Status of supported libraries
 
 |Library             |Supported        |Supported versions
 |----------------|-------------|-------------|
-|Firebase|:white_check_mark:| \>= 6.3.4
-|Sentry|:white_check_mark:| \>= 1.3.0
+|@react-native-firebase/analytics|:white_check_mark:| \>= 6.0.0
+|@react-native-firebase/crashlytics|:white_check_mark:| \>= 6.0.0
+|@sentry/react-native|:white_check_mark:| \>= 1.3.0
 |Adobe|:x:|
 
 
@@ -47,7 +57,7 @@ import initLogging, {
 And the others if you want to plug to our library.
 ```javascript
 import Reactotron from 'reactotron-react-native';
-import {reactotronRedux} from 'reactotron-redux';
+import { reactotronRedux } from 'reactotron-redux';
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 import * as Sentry from "@sentry/react-native";
@@ -59,22 +69,25 @@ Before any call to `react-native-logging`'s features, you have to initialize it.
 
 #### Initialization
 
-Librarie's initialization function take two parameters `initLogging(config, loggers)`:
+Librarie's initialization function take two parameters `initLogging(config, loggers, recordErrors)`:
 - `config: IConfig`: IConfig is an object which takes `Reactotron` and `reactotronRedux` as parameters. Need to pass reactotron's libraries to be able to use it later.
 - `loggers: Array<Function>`: array of function, functions imported from this library to send log to use libraries like firebase, sentry..
 - `recordErrors: Array<Function>`: array of function, functions imported from this library to record error to use libraries like crashlytics..
 
-With reactotron, redux & firebase
+###### Examples
+
+With Reactotron Redux, Firebase analytics, crashlytics & handle fatal JS error to send to crash services in release mode
 ```javascript
 initLogging({
 Reactotron,
 reactotronRedux,
-asyncStorage: AsyncStorage,
-}, [createFirebaseLogger(analytics())]);
+AsyncStorage,
+reportJSErrors: !__DEV__,
+}, [createFirebaseLogger(analytics())], [createCrashlyticsLogger(crashlytics())]);
 ```
-Only Sentry
+Only Sentry with only Reactotron
 ```javascript
-initLogging({}, [createSentryLogger(Sentry)]);
+initLogging({ Reactotron }, [createSentryLogger(Sentry)]);
 ```
 
 #### Usage

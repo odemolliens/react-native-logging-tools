@@ -2,6 +2,7 @@ import { reactotron, reactotronWithRedux } from './reactotron';
 import { createFirebaseLogger, createSentryLogger, createCrashlyticsLogger } from './loggers';
 import { IConfig, IReactotron } from './model/config';
 import { isFunction } from './helpers/functions';
+import setupExceptionHandler from './exceptionHandler';
 
 let Reactotron: any;
 let reactotronRedux: any;
@@ -31,6 +32,10 @@ export default function init(config: IConfig, createdLoggers: Function[] = [], c
     if (isFunction(logger)) {
       recordErrors.push(logger);
     }
+  }
+
+  if (config.reportJSErrors === true) {
+    setupExceptionHandler();
   }
 }
 

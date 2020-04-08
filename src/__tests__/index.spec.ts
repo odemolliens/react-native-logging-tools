@@ -93,7 +93,7 @@ describe('index test suite', () => {
   });
 
   it('should init properly and record error', () => {
-    initLogging({ Reactotron, reactotronRedux }, [], [createCrashlyticsLogger(crashlytics)]);
+    initLogging({ Reactotron, reactotronRedux, reportJSErrors: true }, [], [createCrashlyticsLogger(crashlytics)]);
     recordError('error', { key: 'value' });
   });
 
