@@ -54,7 +54,7 @@ import initLogging, {
 } from 'react-native-logging';
 ```
 
-And the others if you want to plug to our library.
+And the others libraries which can bu plugged
 ```javascript
 import Reactotron from 'reactotron-react-native';
 import { reactotronRedux } from 'reactotron-redux';
@@ -69,25 +69,33 @@ Before any call to `react-native-logging`'s features, you have to initialize it.
 
 #### Initialization
 
-Librarie's initialization function take two parameters `initLogging(config, loggers, recordErrors)`:
-- `config: IConfig`: IConfig is an object which takes `Reactotron` and `reactotronRedux` as parameters. Need to pass reactotron's libraries to be able to use it later.
-- `loggers: Array<Function>`: array of function, functions imported from this library to send log to use libraries like firebase, sentry..
-- `recordErrors: Array<Function>`: array of function, functions imported from this library to record error to use libraries like crashlytics..
+Librarie's initialization function take an object as parameter `initialization(init: IInit)`:
+init is an object which take three keys/values:
+- `config?: IConfig`: IConfig is an object which takes: 
+    - `Reactotron?`: Reactotron library from reactotron-react-native
+    - `reactotronRedux?`: reactotronRedux library from reactotron-redux
+    - `AsyncStorage?`: from @react-native-community/async-storage ie
+    - `reportJSErrors?: boolean`: to set to true if you want send js crash reports`
+- `analytics?: Array<Function>`: functions imported from this library (ie: `createFirebaseLogger`) to send log/analytics when you will call `logEvent`
+- `errorReporters?: Array<Function>`: functions imported from this library (ie: `createCrashlyticsLogger`) to send errors when you will call `recordError` or when app crashed with a JS error (only if `reportJSErrors` is true and `errorReporters` not empty )
 
 ###### Examples
 
 With Reactotron Redux, Firebase analytics, crashlytics & handle fatal JS error to send to crash services in release mode
 ```javascript
 initLogging({
-Reactotron,
-reactotronRedux,
-AsyncStorage,
-reportJSErrors: !__DEV__,
-}, [createFirebaseLogger(analytics())], [createCrashlyticsLogger(crashlytics())]);
+  config: { reportJSErrors: !__DEV__ },
+  analytics: [createFirebaseLogger(analytics())],
+  errorReporters: [createCrashlyticsLogger(crashlytics())],
+});
 ```
 Only Sentry with only Reactotron
 ```javascript
-initLogging({ Reactotron }, [createSentryLogger(Sentry)]);
+initLogging({
+  config: { Reactotron },
+  analytics: [createSentryLogger(analytics())],
+  errorReporters: [createCrashlyticsLogger(crashlytics())],
+});
 ```
 
 #### Usage
@@ -156,3 +164,7 @@ To be able to send log to sentry each time when you will call our `logEvent`, yo
     dsn: 'YOUR_DSN',
 }
 ```
+
+### Crash reporting
+
+If you decided to use the crash handler, it will catch all fatal JS errors and sent a report to libraries added to `recordErrors` during the initialization

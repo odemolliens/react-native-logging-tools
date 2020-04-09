@@ -1,6 +1,6 @@
 import { reactotron, reactotronWithRedux } from './reactotron';
 import { createFirebaseLogger, createSentryLogger, createCrashlyticsLogger } from './loggers';
-import { IConfig, IReactotron } from './model/config';
+import { IInit, IReactotron } from './model';
 import { isFunction } from './helpers/functions';
 import setupExceptionHandler from './exceptionHandler';
 
@@ -11,31 +11,36 @@ let AsyncStorage: any;
 const loggers: Function[] = [];
 const recordErrors: Function[] = [];
 
-export default function init(config: IConfig, createdLoggers: Function[] = [], createdErrors: Function[] = []): void {
-  if (config.Reactotron) {
-    Reactotron = config.Reactotron;
-  }
-  if (config.reactotronRedux) {
-    reactotronRedux = config.reactotronRedux;
-  }
-  if (config.AsyncStorage) {
-    AsyncStorage = config.AsyncStorage;
-  }
-
-  for (const logger of createdLoggers) {
-    if (isFunction(logger)) {
-      loggers.push(logger);
+export default function initialization(init: IInit): void {
+  if (init.config) {
+    if (init.config.Reactotron) {
+      Reactotron = init.config.Reactotron;
+    }
+    if (init.config.reactotronRedux) {
+      reactotronRedux = init.config.reactotronRedux;
+    }
+    if (init.config.AsyncStorage) {
+      AsyncStorage = init.config.AsyncStorage;
+    }
+    if (init.config.reportJSErrors === true) {
+      setupExceptionHandler();
     }
   }
 
-  for (const logger of createdErrors) {
-    if (isFunction(logger)) {
-      recordErrors.push(logger);
+  if (init.analytics) {
+    for (const logger of init.analytics) {
+      if (isFunction(logger)) {
+        loggers.push(logger);
+      }
     }
   }
 
-  if (config.reportJSErrors === true) {
-    setupExceptionHandler();
+  if (init.errorReporters) {
+    for (const reporter of init.errorReporters) {
+      if (isFunction(reporter)) {
+        recordErrors.push(reporter);
+      }
+    }
   }
 }
 

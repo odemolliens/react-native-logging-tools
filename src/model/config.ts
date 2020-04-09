@@ -4,7 +4,3 @@ export interface IConfig {
   AsyncStorage?: any;
   reportJSErrors?: boolean;
 }
-
-export interface IReactotron {
-  createEnhancer: any;
-}
