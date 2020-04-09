@@ -1,4 +1,4 @@
-import { IReactotron } from '../model/config';
+import { IReactotron } from '../model';
 
 export function reactotron(Reactotron: any, AsyncStorage: any, appName: string): IReactotron {
   return Reactotron.configure({ name: appName }).setAsyncStorageHandler(AsyncStorage).useReactNative().connect();
