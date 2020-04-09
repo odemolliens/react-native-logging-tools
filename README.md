@@ -84,7 +84,7 @@ init is an object which take three keys/values:
 With Reactotron Redux, Firebase analytics, crashlytics & handle fatal JS error to send to crash services in release mode
 ```javascript
 initLogging({
-  config: { reportJSErrors: !__DEV__ },
+  config: { Reactotron, AsyncStorage, reactotronRedux, reportJSErrors: !__DEV__ },
   analytics: [createFirebaseLogger(analytics())],
   errorReporters: [createCrashlyticsLogger(crashlytics())],
 });
