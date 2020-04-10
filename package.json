@@ -60,9 +60,6 @@
     "tslint-react": "^4.2.0",
     "typescript": "^3.7.3"
   },
-  "resolutions": {
-    "minimist": "^1.2.5"
-  },
   "jest": {
     "verbose": true,
     "collectCoverage": true,
