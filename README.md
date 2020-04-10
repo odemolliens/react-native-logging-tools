@@ -1,4 +1,4 @@
-# react-native-logging
+# react-native-logging-tools
 
 A react native module that lets you to:
  - Connect your app to reactotron easily
@@ -22,11 +22,11 @@ and all this, as easily as possible
 
 ## Getting started
 
-`$ yarn add react-native-logging`
+`$ yarn add react-native-logging-tools`
 
 or
 
-`$ npm install react-native-logging`
+`$ npm install react-native-logging-tools`
 
 ## Status of supported libraries
 
@@ -51,7 +51,7 @@ import initLogging, {
   setupReactotron,
   setupReactotronWithRedux,
   logEvent,
-} from 'react-native-logging';
+} from 'react-native-logging-tools';
 ```
 
 And the others libraries which can bu plugged
@@ -65,7 +65,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 ```
 
 ### How to use
-Before any call to `react-native-logging`'s features, you have to initialize it.
+Before any call to `react-native-logging-tools`'s features, you have to initialize it.
 
 #### Initialization
 

@@ -1,5 +1,5 @@
 {
-  "name": "react-native-logging",
+  "name": "react-native-logging-tools",
   "title": "React Native library created to ease logging",
   "version": "1.0.0",
   "main": "src/index.ts",
@@ -25,12 +25,12 @@
     "typescript"
   ],
   "author": "Imran Mentese & Martin VanLerberghe",
-  "license": "",
+  "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/imranMnts/react-native-logging/issues"
+    "url": "https://github.com/imranMnts/react-native-logging-tools/issues"
   },
-  "homepage": "https://github.com/imranMnts/react-native-logging#readme",
+  "homepage": "https://github.com/imranMnts/react-native-logging-tools#readme",
   "peerDependencies": {
     "@react-native-firebase/analytics": ">=6.0.0",
     "@react-native-firebase/app": ">=6.0.0",

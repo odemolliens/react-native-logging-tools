@@ -1,4 +1,4 @@
-# Contributing to react-native-logging
+# Contributing to react-native-logging-tools
 
 In order to contribute to this project you must open a merge request for a branch prefixed with `feat/[name-of-feature]` for new features or `fix/[name-of-fix]` for fixes.
 
