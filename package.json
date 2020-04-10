@@ -1,6 +1,6 @@
 {
   "name": "react-native-logging",
-  "title": "Custom React Native Logging",
+  "title": "React Native library created to ease logging",
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
@@ -12,11 +12,25 @@
     "tsc": "tsc"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "react native",
+    "hybrid",
+    "mobile",
+    "ios",
+    "android",
+    "logging",
+    "analytics",
+    "typescript"
   ],
-  "author": "",
+  "author": "Imran Mentese & Martin VanLerberghe",
   "license": "",
   "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/imranMnts/react-native-logging/issues"
+  },
+  "homepage": "https://github.com/imranMnts/react-native-logging#readme",
   "peerDependencies": {
     "@react-native-firebase/analytics": ">=6.0.0",
     "@react-native-firebase/app": ">=6.0.0",
