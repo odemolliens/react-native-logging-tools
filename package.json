@@ -25,7 +25,7 @@
     "typescript"
   ],
   "author": "Imran Mentese & Martin VanLerberghe",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/imranMnts/react-native-logging-tools/issues"
