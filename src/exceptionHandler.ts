@@ -1,4 +1,4 @@
-import { recordError } from './index';
+import { recordError } from './modules/events';
 
 export default function setupExceptionHandler() {
   // @ts-ignore

@@ -1,4 +1,5 @@
-import initLogging, {
+import {
+  init,
   createSentryLogger,
   createFirebaseLogger,
   setupReactotronWithRedux,
@@ -33,70 +34,71 @@ describe('index test suite', () => {
   };
 
   it('should init properly', () => {
-    initLogging({});
+    init({});
   });
 
-  it('should init properly', () => {
-    initLogging({ config: {}, analytics: [], errorReporters: [] });
+  it('should init not properly', () => {
+    init({ config: {}, analytics: [], errorReporters: [] });
   });
 
-  it('should init properly with bad firebase initialization', () => {
-    initLogging({
-      analytics: [createFirebaseLogger({}), createSentryLogger(sentry, { dsn: 'dsn' })],
-      errorReporters: [createCrashlyticsLogger({})],
-    });
+  it('should init not properly 2', () => {
+    // @ts-ignore
+    init({ config: { reportJSErrors: true }, analytics: [{}], errorReporters: [{}] });
   });
 
-  it('should init properly with bad sentry initialization', () => {
-    initLogging({
-      analytics: [createFirebaseLogger(analytics), createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' })],
+  it('should init with wrong datas', () => {
+    init({
+      analytics: [createFirebaseLogger({}, true), createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' }, true)],
+      errorReporters: [createCrashlyticsLogger({}, true)],
     });
     logEvent('event', { key: 'value' });
+    recordError('error', { key: 'value' });
   });
 
+  it('should init with wrong datas', () => {
+    init({
+      analytics: [createFirebaseLogger({}), createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' })],
+      errorReporters: [createCrashlyticsLogger({})],
+    });
+    logEvent('event', { key: 'value' });
+    recordError('error', { key: 'value' });
+  });
+
+  // Firebase & Sentry
+
   it('should init properly and log event', () => {
-    initLogging({
+    init({
       analytics: [createFirebaseLogger(analytics), createSentryLogger(sentry, { dsn: 'dsn' })],
     });
     logEvent('event', { key: 'value' });
   });
 
   it('should init properly and log without param', () => {
-    initLogging({
+    init({
       analytics: [createFirebaseLogger(analytics), createSentryLogger(sentry, { dsn: 'dsn' })],
     });
     logEvent('event');
   });
 
-  it('should init properly and log with wrong data', () => {
-    // @ts-ignore
-    initLogging({ analytics: [{}] });
-    logEvent('event');
-  });
+  // Crashlytics
 
   it('should init properly and record error', () => {
-    initLogging({ config: { reportJSErrors: true }, errorReporters: [createCrashlyticsLogger(crashlytics)] });
+    init({ config: { reportJSErrors: true }, errorReporters: [createCrashlyticsLogger(crashlytics)] });
     recordError('error', { key: 'value' });
   });
 
   it('should init properly and record error without param', () => {
-    initLogging({ config: { reportJSErrors: true }, errorReporters: [createCrashlyticsLogger(crashlytics)] });
-    recordError('error');
-  });
-
-  it('should init properly and record error with wrong data', () => {
-    // @ts-ignore
-    initLogging({ config: { reportJSErrors: true }, errorReporters: [{}] });
+    init({ config: { reportJSErrors: true }, errorReporters: [createCrashlyticsLogger(crashlytics)] });
     recordError('error');
   });
 
   it('should init properly and setup reactotron', () => {
-    initLogging({ config: { Reactotron, AsyncStorage } });
+    init({ config: { Reactotron, AsyncStorage } });
     setupReactotron('app_name');
   });
 
   it('should init properly and setup reactotron and redux', () => {
-    initLogging({ config: { Reactotron, reactotronRedux, AsyncStorage } });
+    init({ config: { Reactotron, reactotronRedux, AsyncStorage } });
     setupReactotronWithRedux('app_name');
   });
 });

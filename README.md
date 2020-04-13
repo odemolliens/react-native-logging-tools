@@ -1,9 +1,12 @@
-# react-native-logging-tools
+# React Native Logging Tools
 
-A react native module that lets you to:
+A react native module that lets you:
  - Connect your app to reactotron easily
- - Plug many analytics libraries and send data to everyone every time
- - Plug many crash reporter libraries and send error event to everyone every time
+ - Plug multiple analytics libraries to your project
+    - Firebase analytics
+    - Sentry
+ - Plug multiple crash reporter libraries to your project
+    - Firebase crashlytics
  - Register a global error handler which will capture fatal JS exceptions and send a report to your crash reporter libraries
 
 and all this, as easily as possible
@@ -44,7 +47,8 @@ or
 
 To start, you have to import libraries which will be used.
 ```javascript
-import initLogging, {
+import {
+  init,
   createFirebaseLogger,
   createCrashlyticsLogger,
   createSentryLogger,
@@ -54,7 +58,7 @@ import initLogging, {
 } from 'react-native-logging-tools';
 ```
 
-And the others libraries which can bu plugged
+And the others libraries which can be plugged
 ```javascript
 import Reactotron from 'reactotron-react-native';
 import { reactotronRedux } from 'reactotron-redux';
@@ -69,70 +73,29 @@ Before any call to `react-native-logging-tools`'s features, you have to initiali
 
 #### Initialization
 
-Librarie's initialization function take an object as parameter `initialization(init: IInit)`:
-init is an object which take three keys/values:
-- `config?: IConfig`: IConfig is an object which takes: 
-    - `Reactotron?`: Reactotron library from reactotron-react-native
-    - `reactotronRedux?`: reactotronRedux library from reactotron-redux
-    - `AsyncStorage?`: from @react-native-community/async-storage ie
-    - `reportJSErrors?: boolean`: to set to true if you want send js crash reports`
-- `analytics?: Array<Function>`: functions imported from this library (ie: `createFirebaseLogger`) to send log/analytics when you will call `logEvent`
-- `errorReporters?: Array<Function>`: functions imported from this library (ie: `createCrashlyticsLogger`) to send errors when you will call `recordError` or when app crashed with a JS error (only if `reportJSErrors` is true and `errorReporters` not empty )
-
-###### Examples
-
-With Reactotron Redux, Firebase analytics, crashlytics & handle fatal JS error to send to crash services in release mode
-```javascript
-initLogging({
-  config: { Reactotron, AsyncStorage, reactotronRedux, reportJSErrors: !__DEV__ },
-  analytics: [createFirebaseLogger(analytics())],
-  errorReporters: [createCrashlyticsLogger(crashlytics())],
-});
-```
-Only Sentry with only Reactotron
-```javascript
-initLogging({
-  config: { Reactotron },
-  analytics: [createSentryLogger(analytics())],
-  errorReporters: [createCrashlyticsLogger(crashlytics())],
-});
-```
+Documentation and examples for initialization step can be found [here](./REFERENCE_API.md).
 
 #### Usage
 
 ##### Reactotron
 
-If you initialized Reactotron (and/or reactotronRedux), you can plug it to your redux store
-```javascript
-const store = createStore(
-  rootReducer,
-  compose(
-    ...,
-    setupReactotron('APP_NAME').createEnhancer()
-OR
-    setupReactotronWithRedux('APP_NAME').createEnhancer()
-  )
-);
-```
+Documentation and example for Reactotron can be found [here](./REFERENCE_API.md).
 
 ##### Loggers
 
 ###### Events
 
 You can call this function where do you want/need to send logs to each plugged libraries
-```javascript
-logEvent('EVENT_NAME', { your_key: 'value' });
-```
+
+Documentation and example for log event can be found [here](./REFERENCE_API.md).
 
 If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
 
 ###### Errors
 
 You can call this function where do you want/need to send logs to each plugged libraries
-```javascript
-recordError('EVENT_NAME', { your_key: 'value' });
-```
 
+Documentation and example for error report can be found [here](./REFERENCE_API.md).
 
 ### Implemented libraries
 
@@ -140,7 +103,7 @@ recordError('EVENT_NAME', { your_key: 'value' });
 
 Need to add `@react-native-firebase/app` and `@react-native-firebase/crashlytics` to your project and follow their documentations to setup them properly.
 
-To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `initLogging`'s thrid parameter which take an array.
+To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `init`'s thrid parameter which take an array.
 
 `createCrashlyticsLogger` take one parameter, you have to add it `crashlytics()` from `@react-native-firebase/crashlytics`
 
@@ -148,7 +111,7 @@ To be able to send error to firebase crashlytics each time when you will call ou
 
 Need to add `@react-native-firebase/app` and `@react-native-firebase/analytics` to your project and follow their documentations to setup them properly.
 
-To be able to send log to firebase analytics each time when you will call our `logEvent`, you need to add `createFirebaseLogger` to our `initLogging`'s second parameter which take an array.
+To be able to send log to firebase analytics each time when you will call our `logEvent`, you need to add `createFirebaseLogger` to our `init`'s second parameter which take an array.
 
 `createFirebaseLogger` take one parameter, you have to add it `analytics()` from `@react-native-firebase/analytics`
 
@@ -156,7 +119,7 @@ To be able to send log to firebase analytics each time when you will call our `l
 
 Need to add `@sentry/react-native` to your project and follow their documentations to setup them properly.
 
-To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `initLogging`'s second parameter which take an array.
+To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `init`'s second parameter which take an array.
 
 `createSentryLogger` take two parameters, you have to add it `Sentry` from `@sentry/react-native` and sentry config object:
 ```javascript
