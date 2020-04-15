@@ -72,7 +72,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 ### Initialization
 
-Before any call to `react-native-logging-tools`'s features, you have to initialize it.
+Before any call to `react-native-logging-tools`'s features, you have to initialize it (in your `App.ts` or `store.ts` for example)
 
 ```javascript
 init({
