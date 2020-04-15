@@ -85,7 +85,7 @@ init({
 });
 ```
 
-Documentation and examples for initialization step can be found [here](./REFERENCE_API.md).
+Documentation and examples about initialization steps can be found [here](./REFERENCE_API.md).
 
 ### Usage
 
@@ -97,7 +97,7 @@ init({
 });
 ```
 
-Documentation and example for Reactotron can be found [here](./REFERENCE_API.md).
+Documentation and example about Reactotron can be found [here](./REFERENCE_API.md).
 
 #### Loggers
 
@@ -109,7 +109,7 @@ You can call this function where do you want/need to send logs to each plugged l
 logEvent('EVENT_NAME', { your_key: 'value' });
 ```
 
-Documentation and example for log event can be found [here](./REFERENCE_API.md).
+Documentation and example about logging event can be found [here](./REFERENCE_API.md).
 
 If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
 
@@ -121,7 +121,7 @@ You can call this function where do you want/need to send logs to each plugged l
 recordError('EVENT_NAME', { your_key: 'value' });
 ```
 
-Documentation and example for error report can be found [here](./REFERENCE_API.md).
+Documentation and example about error reporting can be found [here](./REFERENCE_API.md).
 
 ---
 
