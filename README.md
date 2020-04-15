@@ -2,11 +2,8 @@
 
 A react native module that lets you:
  - Connect your app to reactotron easily
- - Plug multiple analytics libraries to your project
-    - Firebase analytics
-    - Sentry
- - Plug multiple crash reporter libraries to your project
-    - Firebase crashlytics
+ - Send logs to multiple services in one time
+ - Send crash/error reports to multiple services in one time
  - Register a global error handler which will capture fatal JS exceptions and send a report to your crash reporter libraries
 
 and all this, as easily as possible
