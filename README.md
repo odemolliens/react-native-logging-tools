@@ -23,6 +23,8 @@ and all this, as easily as possible
         - [Firebase analytics](#firebase-analytics)
         - [Sentry](#sentry)
 
+---
+
 ## Getting started
 
 `$ yarn add react-native-logging-tools`
@@ -30,6 +32,8 @@ and all this, as easily as possible
 or
 
 `$ npm install react-native-logging-tools`
+
+---
 
 ## Status of supported libraries
 
@@ -40,6 +44,7 @@ or
 |@sentry/react-native|:white_check_mark:| \>= 1.3.0
 |Adobe|:x:|
 
+---
 
 ## Usage
 
@@ -68,38 +73,61 @@ import * as Sentry from "@sentry/react-native";
 import AsyncStorage from '@react-native-community/async-storage';
 ```
 
-### How to use
+### Initialization
+
 Before any call to `react-native-logging-tools`'s features, you have to initialize it.
 
-#### Initialization
+```javascript
+init({
+  config: { Reactotron, AsyncStorage, reactotronRedux, reportJSErrors: !__DEV__ },
+  analytics: [createFirebaseLogger(analytics(), true)],
+  errorReporters: [createCrashlyticsLogger(crashlytics())],
+});
+```
 
 Documentation and examples for initialization step can be found [here](./REFERENCE_API.md).
 
-#### Usage
+### Usage
 
-##### Reactotron
+#### Reactotron
+
+```javascript
+init({
+  config: { Reactotron },
+});
+```
 
 Documentation and example for Reactotron can be found [here](./REFERENCE_API.md).
 
-##### Loggers
+#### Loggers
 
-###### Events
+##### Events
 
 You can call this function where do you want/need to send logs to each plugged libraries
+
+```javascript
+logEvent('EVENT_NAME', { your_key: 'value' });
+```
 
 Documentation and example for log event can be found [here](./REFERENCE_API.md).
 
 If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
 
-###### Errors
+##### Errors
 
 You can call this function where do you want/need to send logs to each plugged libraries
 
+```javascript
+recordError('EVENT_NAME', { your_key: 'value' });
+```
+
 Documentation and example for error report can be found [here](./REFERENCE_API.md).
 
-### Implemented libraries
+---
 
-#### Firebase crashlytics
+## Implemented libraries
+
+### Firebase crashlytics
 
 Need to add `@react-native-firebase/app` and `@react-native-firebase/crashlytics` to your project and follow their documentations to setup them properly.
 
@@ -107,7 +135,7 @@ To be able to send error to firebase crashlytics each time when you will call ou
 
 `createCrashlyticsLogger` take one parameter, you have to add it `crashlytics()` from `@react-native-firebase/crashlytics`
 
-#### Firebase analytics
+### Firebase analytics
 
 Need to add `@react-native-firebase/app` and `@react-native-firebase/analytics` to your project and follow their documentations to setup them properly.
 
@@ -115,7 +143,7 @@ To be able to send log to firebase analytics each time when you will call our `l
 
 `createFirebaseLogger` take one parameter, you have to add it `analytics()` from `@react-native-firebase/analytics`
 
-#### Sentry
+### Sentry
 
 Need to add `@sentry/react-native` to your project and follow their documentations to setup them properly.
 

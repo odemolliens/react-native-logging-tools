@@ -8,13 +8,13 @@ Library initializer, to be used before anything
 
 It take an object as parameter `initialization(init: IInit)`:
 init is an object which take three keys/values:
-- `config?: IConfig`: IConfig is an object which takes: 
-    - `Reactotron?`: Reactotron library from reactotron-react-native
-    - `reactotronRedux?`: reactotronRedux library from reactotron-redux
-    - `AsyncStorage?`: from @react-native-community/async-storage ie
-    - `reportJSErrors?: boolean`: to set to true if you want send js crash reports`
-- `analytics?: Array<Function>`: functions imported from this library (ie: `createFirebaseLogger`) to send log/analytics when you will call `logEvent`
-- `errorReporters?: Array<Function>`: functions imported from this library (ie: `createCrashlyticsLogger`) to send errors when you will call `recordError` or when app crashed with a JS error (only if `reportJSErrors` is true and `errorReporters` not empty )
+- `config: IConfig`: IConfig is an object which takes: (optional)
+    - `Reactotron`: Reactotron library from reactotron-react-native (optional) (mandatory if you want plug Reactotron to your store)
+    - `reactotronRedux`: reactotronRedux library from reactotron-redux (optional) (mandatory if you want plug reactotronRedux to your store)
+    - `AsyncStorage`: from @react-native-community/async-storage ie (optional)
+    - `reportJSErrors: boolean`: to set to true if you want send js crash reports` (optional)
+- `analytics: Array<Function>`: functions imported from this library (ie: `createFirebaseLogger`) to send log/analytics when you will call `logEvent` (optional)
+- `errorReporters: Array<Function>`: functions imported from this library (ie: `createCrashlyticsLogger`) to send errors when you will call `recordError` or when app crashed with a JS error (only if `reportJSErrors` is true and `errorReporters` not empty) (optional)
 
 ### Examples
 
