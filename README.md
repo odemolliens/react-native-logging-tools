@@ -18,7 +18,7 @@ and all this, as easily as possible
     - [How to use](#how-to-use)
         - [Initialization](#initialization)
         - [Usage](#usage)
-    - [Implemented libraries](#implemented-libraries)
+    - [Supported libraries](#supported-libraries)
         - [Firebase crashlytics](#firebase-crashlytics)
         - [Firebase analytics](#firebase-analytics)
         - [Sentry](#sentry)
@@ -103,7 +103,7 @@ Documentation and example about Reactotron can be found [here](./REFERENCE_API.m
 
 ##### Events
 
-You can call this function where do you want/need to send logs to each plugged libraries
+You can call this function where do you want/need to send logs to each plugged libraries to `analytics` during the initialization step
 
 ```javascript
 logEvent('EVENT_NAME', { your_key: 'value' });
@@ -115,7 +115,7 @@ If you use `react-navigation` and you want send to analytics navigation events e
 
 ##### Errors
 
-You can call this function where do you want/need to send logs to each plugged libraries
+You can call this function where do you want/need to send logs to each plugged libraries to `errorReporters` during the initialization step
 
 ```javascript
 recordError('EVENT_NAME', { your_key: 'value' });
@@ -125,7 +125,7 @@ Documentation and example about error reporting can be found [here](./REFERENCE_
 
 ---
 
-## Implemented libraries
+## Supported libraries
 
 ### Firebase crashlytics
 
