@@ -1,8 +1,6 @@
 export interface IConfig {
   Reactotron?: any;
   reactotronRedux?: any;
-}
-
-export interface IReactotron {
-  createEnhancer: any;
+  AsyncStorage?: any;
+  reportJSErrors?: boolean;
 }
