@@ -1,4 +1,6 @@
-export const createSentryLogger = (sentry: any, config: any, printError: boolean = false) => {
+import { ISentry } from '../../model/sentry';
+
+export const createSentryLogger = (sentry: any, config: ISentry, printError: boolean = false) => {
   sentry.init({ dsn: config.dsn });
   // @ts-ignore
   return (event: string, params: any) => {

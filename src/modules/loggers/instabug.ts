@@ -1,5 +1,7 @@
-export const createInstabugLogger = (instabug: any, token: string, printError: boolean = false) => {
-  instabug.startWithToken(token);
+import { IInstabug } from '../../model/instabug';
+
+export const createInstabugLogger = (instabug: any, config: IInstabug, printError: boolean = false) => {
+  instabug.startWithToken(config.token, config.invocationEvent || instabug.invocationEvent.shake);
   // @ts-ignore
   return (event: string, params: any) => {
     try {
