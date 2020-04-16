@@ -2,6 +2,15 @@
 
 Page containing the full index of all React Native Logging Tools reference API types
 
+- [init](#init)
+- [setupReactotron](#setupreactotron)
+- [setupReactotronWithRedux](#setupreactotronwithredux)
+- [createFirebaseLogger](#createdirebaselogger)
+- [createSentryLogger](#createsentrylogger)
+- [createCrashlyticsLogger](#createcrashlyticslogger)
+- [logEvent](#logevent)
+- [recordError](#recorderror)
+
 ## init
 
 Library initializer, to be used before anything
