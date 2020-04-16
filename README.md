@@ -14,7 +14,7 @@ and all this, as easily as possible
     - [Imports](#imports)
     - [Initialization](#initialization)
     - [How to use](#how-to-use)
-        - [Reactotron](#Reactotron)
+        - [Reactotron](#reactotron)
         - [Loggers](#loggers)
             - [Events](#events)
             - [Errors](#errors)
@@ -75,7 +75,12 @@ Before any call to `react-native-logging-tools`'s features, you have to initiali
 
 ```javascript
 init({
-  config: { Reactotron, AsyncStorage, reactotronRedux, reportJSErrors: !__DEV__ },
+  config: {
+    Reactotron,
+    AsyncStorage,
+    reactotronRedux,
+    reportJSErrors: !__DEV__,
+    isSensitiveBuild: __STORE__ },
   analytics: [createFirebaseLogger(analytics(), true)],
   errorReporters: [createCrashlyticsLogger(crashlytics())],
 });
@@ -103,6 +108,10 @@ You can call this function where do you want/need to send logs to each plugged l
 
 ```javascript
 logEvent('EVENT_NAME', { your_key: 'value' });
+logDebugEvent('EVENT_NAME', { your_key: 'value' });
+logErrorEvent('EVENT_NAME', { your_key: 'value' });
+logNetworkEvent('EVENT_NAME', { your_key: 'value' });
+logWarningEvent('EVENT_NAME', { your_key: 'value' });
 ```
 
 Documentation and example about logging event can be found [here](./REFERENCE_API.md).

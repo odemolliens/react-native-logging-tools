@@ -1,6 +1,13 @@
 import { setupReactotron, setupReactotronWithRedux } from './modules/reactotron';
 import { createFirebaseLogger, createCrashlyticsLogger, createSentryLogger } from './modules/loggers';
-import { logEvent, recordError } from './modules/events';
+import {
+  logEvent,
+  logDebugEvent,
+  logErrorEvent,
+  logNetworkEvent,
+  logWarningEvent,
+  recordError,
+} from './modules/events';
 import { init } from './modules/init';
 
 export {
@@ -11,5 +18,9 @@ export {
   setupReactotronWithRedux,
   init,
   logEvent,
+  logDebugEvent,
+  logErrorEvent,
+  logNetworkEvent,
+  logWarningEvent,
   recordError,
 };

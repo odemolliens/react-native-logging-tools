@@ -5,6 +5,7 @@ import { isFunction } from '../../helpers/functions';
 export let Reactotron: any;
 export let reactotronRedux: any;
 export let AsyncStorage: any;
+export let isSensitiveBuild: boolean;
 
 export const loggers: Function[] = [];
 export const recordErrors: Function[] = [];
@@ -22,6 +23,9 @@ export function init(initConfig: IInit): void {
     }
     if (initConfig.config.reportJSErrors === true) {
       setupExceptionHandler();
+    }
+    if (initConfig.config.isSensitiveBuild === true) {
+      isSensitiveBuild = initConfig.config.isSensitiveBuild;
     }
   }
 

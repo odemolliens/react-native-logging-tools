@@ -28,7 +28,8 @@ init is an object which take three keys/values:
     - `Reactotron`: Reactotron library from reactotron-react-native (optional) (mandatory if you want plug Reactotron to your store)
     - `reactotronRedux`: reactotronRedux library from reactotron-redux (optional) (mandatory if you want plug reactotronRedux to your store)
     - `AsyncStorage`: from @react-native-community/async-storage ie (optional)
-    - `reportJSErrors: boolean`: to set to true if you want send js crash reports` (optional)
+    - `reportJSErrors: boolean`: to set to true if you want send js crash reports (optional)
+    - `isSensitiveBuild: boolean`: to set to true if you want defined some logEvent as sensitive and not send log for this one (optional)
 - `analytics: Array<Function>`: functions imported from this library (ie: `createFirebaseLogger`) to send log/analytics when you will call `logEvent` (optional)
 - `errorReporters: Array<Function>`: functions imported from this library (ie: `createCrashlyticsLogger`) to send errors when you will call `recordError` or when app crashed with a JS error (only if `reportJSErrors` is true and `errorReporters` not empty) (optional)
 
@@ -149,12 +150,73 @@ To send an event to analytics services
 
 Two parameters:
 - `event: string`: event's title to send to analytics
-- `params: object`: keys/values to send to analytics
+- `params: object`: keys/values to send to analytics (default value: `{}`)
+- `sensitiveData: boolean`: set true if is sensitive data which will be sent to disable for the store build eg (`isSensitiveBuild` should be set to true during initialization too for the build which will be sent to store) (default value: `false`)
 
 #### Example
 
 ```javascript
-logEvent('EVENT_NAME', { your_key: 'value' });
+logEvent('EVENT_NAME', { your_key: 'value' }, true);
+```
+------
+### logWarningEvent
+
+To send an event to analytics services, it's the same as `logEvent` but it will automatically prefix the event name with `W/` to facilitate the reading
+
+Two parameters:
+- `event: string`: event's title to send to analytics
+- `params: object`: keys/values to send to analytics (default value: `{}`)
+- `sensitiveData: boolean`: set true if is sensitive data which will be sent to disable for the store build eg (`isSensitiveBuild` should be set to true during initialization too for the build which will be sent to store) (default value: `false`)
+
+#### Example
+
+```javascript
+logWarningEvent('EVENT_NAME', { your_key: 'value' }, true);
+```
+------
+### logDebugEvent
+
+To send an event to analytics services, it's the same as `logEvent` but it will automatically prefix the event name with `D/` to facilitate the reading
+
+Two parameters:
+- `event: string`: event's title to send to analytics
+- `params: object`: keys/values to send to analytics (default value: `{}`)
+- `sensitiveData: boolean`: set true if is sensitive data which will be sent to disable for the store build eg (`isSensitiveBuild` should be set to true during initialization too for the build which will be sent to store) (default value: `false`)
+
+#### Example
+
+```javascript
+logDebugEvent('EVENT_NAME', { your_key: 'value' }, true);
+```
+------
+### logNetworkEvent
+
+To send an event to analytics services, it's the same as `logEvent` but it will automatically prefix the event name with `N/` to facilitate the reading
+
+Two parameters:
+- `event: string`: event's title to send to analytics
+- `params: object`: keys/values to send to analytics (default value: `{}`)
+- `sensitiveData: boolean`: set true if is sensitive data which will be sent to disable for the store build eg (`isSensitiveBuild` should be set to true during initialization too for the build which will be sent to store) (default value: `false`)
+
+#### Example
+
+```javascript
+logNetworkEvent('EVENT_NAME', { your_key: 'value' }, true);
+```
+------
+### logErrorEvent
+
+To send an event to analytics services, it's the same as `logEvent` but it will automatically prefix the event name with `E/` to facilitate the reading
+
+Two parameters:
+- `event: string`: event's title to send to analytics
+- `params: object`: keys/values to send to analytics (default value: `{}`)
+- `sensitiveData: boolean`: set true if is sensitive data which will be sent to disable for the store build eg (`isSensitiveBuild` should be set to true during initialization too for the build which will be sent to store) (default value: `false`)
+
+#### Example
+
+```javascript
+logErrorEvent('EVENT_NAME', { your_key: 'value' }, true);
 ```
 ------
 ### recordError

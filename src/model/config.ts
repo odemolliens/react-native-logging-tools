@@ -3,4 +3,5 @@ export interface IConfig {
   reactotronRedux?: any;
   AsyncStorage?: any;
   reportJSErrors?: boolean;
+  isSensitiveBuild?: boolean;
 }
