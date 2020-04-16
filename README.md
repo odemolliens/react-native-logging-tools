@@ -14,7 +14,7 @@ and all this, as easily as possible
     - [Imports](#imports)
     - [Initialization](#initialization)
     - [How to use](#how-to-use)
-        - [Reactotron](#Reactotron)
+        - [Reactotron](#reactotron)
         - [Loggers](#loggers)
             - [Events](#events)
             - [Errors](#errors)
@@ -38,7 +38,7 @@ or
 |@react-native-firebase/analytics|:white_check_mark:| \>= 6.0.0
 |@react-native-firebase/crashlytics|:white_check_mark:| \>= 6.0.0
 |@sentry/react-native|:white_check_mark:| \>= 1.3.0
-|Adobe|:x:|
+|instabug-reactnative|:white_check_mark:| \>= 9.0.0
 
 ---
 
@@ -63,6 +63,7 @@ And the others libraries which can be plugged
 ```javascript
 import Reactotron from 'reactotron-react-native';
 import { reactotronRedux } from 'reactotron-redux';
+import Instabug from 'instabug-reactnative';
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 import * as Sentry from "@sentry/react-native";
@@ -75,7 +76,12 @@ Before any call to `react-native-logging-tools`'s features, you have to initiali
 
 ```javascript
 init({
-  config: { Reactotron, AsyncStorage, reactotronRedux, reportJSErrors: !__DEV__ },
+  config: {
+    Reactotron,
+    AsyncStorage,
+    reactotronRedux,
+    reportJSErrors: !__DEV__,
+    isSensitiveBuild: __STORE__ },
   analytics: [createFirebaseLogger(analytics(), true)],
   errorReporters: [createCrashlyticsLogger(crashlytics())],
 });
@@ -103,6 +109,10 @@ You can call this function where do you want/need to send logs to each plugged l
 
 ```javascript
 logEvent('EVENT_NAME', { your_key: 'value' });
+logDebugEvent('EVENT_NAME', { your_key: 'value' });
+logErrorEvent('EVENT_NAME', { your_key: 'value' });
+logNetworkEvent('EVENT_NAME', { your_key: 'value' });
+logWarningEvent('EVENT_NAME', { your_key: 'value' });
 ```
 
 Documentation and example about logging event can be found [here](./REFERENCE_API.md).
