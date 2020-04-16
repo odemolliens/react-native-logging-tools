@@ -35,11 +35,11 @@ init is an object which take three keys/values:
 
 #### Examples
 
-With Reactotron Redux, Firebase analytics, crashlytics & handle fatal JS error to send to crash services in release mode
+With Reactotron Redux, Instabug, Firebase analytics, crashlytics & handle fatal JS error to send to crash services in release mode
 ```javascript
 init({
   config: { Reactotron, AsyncStorage, reactotronRedux, reportJSErrors: !__DEV__ },
-  analytics: [createFirebaseLogger(analytics(), true)],
+  analytics: [createFirebaseLogger(analytics(), true), createInstabugLogger(Instabug)],
   errorReporters: [createCrashlyticsLogger(crashlytics())],
 });
 ```
@@ -125,6 +125,23 @@ Two parameters:
 ```javascript
 init({
   analytics: [createSentryLogger(sentry, { dsn: 'dsn' }, true)],
+});
+```
+------
+### createInstabugLogger
+
+To plug Instabug to send event later.
+
+Two parameters:
+- `instabug`: module from `instabug-reactnative`
+- `token: string`: your application's token
+- `printError: boolean`: to print or not instabug event's errors (optional)(default: false)
+
+#### Example
+
+```javascript
+init({
+  analytics: [createInstabugLogger(instabug, 'APP_TOKEN', true)],
 });
 ```
 ------
@@ -241,7 +258,7 @@ recordError('EVENT_NAME', { your_key: 'value' });
 
 Need to add `@react-native-firebase/app` and `@react-native-firebase/crashlytics` to your project and follow their documentations to setup them properly.
 
-To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `init`'s thrid parameter which take an array.
+To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `init` function's `errorReporters` array.
 
 `createCrashlyticsLogger` take one parameter, you have to add it `crashlytics()` from `@react-native-firebase/crashlytics`
 
@@ -249,7 +266,7 @@ To be able to send error to firebase crashlytics each time when you will call ou
 
 Need to add `@react-native-firebase/app` and `@react-native-firebase/analytics` to your project and follow their documentations to setup them properly.
 
-To be able to send log to firebase analytics each time when you will call our `logEvent`, you need to add `createFirebaseLogger` to our `init`'s second parameter which take an array.
+To be able to send log to firebase analytics each time when you will call our `logEvent`, you need to add `createFirebaseLogger` to our `init` function's `analytics` array.
 
 `createFirebaseLogger` take one parameter, you have to add it `analytics()` from `@react-native-firebase/analytics`
 
@@ -257,7 +274,7 @@ To be able to send log to firebase analytics each time when you will call our `l
 
 Need to add `@sentry/react-native` to your project and follow their documentations to setup them properly.
 
-To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `init`'s second parameter which take an array.
+To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `init` function's `analytics` array.
 
 `createSentryLogger` take two parameters, you have to add it `Sentry` from `@sentry/react-native` and sentry config object:
 ```javascript
@@ -265,6 +282,14 @@ To be able to send log to sentry each time when you will call our `logEvent`, yo
     dsn: 'YOUR_DSN',
 }
 ```
+
+#### Instabug
+
+Need to add `instabug-reactnative` to your project and follow their documentations to setup them properly.
+
+To be able to send log to instabug each time when you will call our `logEvent`, you need to add `createInstabugLogger` to our `init` function's `analytics` array.
+
+`createInstabugLogger` take two parameters, you have to add it `Instabug` from `instabug-reactnative` and Instabug app token.
 
 #### Crash reporting
 

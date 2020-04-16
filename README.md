@@ -38,7 +38,7 @@ or
 |@react-native-firebase/analytics|:white_check_mark:| \>= 6.0.0
 |@react-native-firebase/crashlytics|:white_check_mark:| \>= 6.0.0
 |@sentry/react-native|:white_check_mark:| \>= 1.3.0
-|Adobe|:x:|
+|instabug-reactnative|:white_check_mark:| \>= 9.0.0
 
 ---
 
@@ -63,6 +63,7 @@ And the others libraries which can be plugged
 ```javascript
 import Reactotron from 'reactotron-react-native';
 import { reactotronRedux } from 'reactotron-redux';
+import Instabug from 'instabug-reactnative';
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 import * as Sentry from "@sentry/react-native";
