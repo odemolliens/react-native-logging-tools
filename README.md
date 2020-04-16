@@ -9,16 +9,15 @@ A react native module that lets you:
 and all this, as easily as possible
 
 - [Getting started](#getting-started)
-- [Status](#status)
+- [Status of supported libraries](#status-of-supported-libraries)
 - [Usage](#usage)
     - [Imports](#imports)
+    - [Initialization](#initialization)
     - [How to use](#how-to-use)
-        - [Initialization](#initialization)
-        - [Usage](#usage)
-    - [Supported libraries](#supported-libraries)
-        - [Firebase crashlytics](#firebase-crashlytics)
-        - [Firebase analytics](#firebase-analytics)
-        - [Sentry](#sentry)
+        - [Reactotron](#Reactotron)
+        - [Loggers](#loggers)
+            - [Events](#events)
+            - [Errors](#errors)
 
 ---
 
@@ -84,7 +83,7 @@ init({
 
 Documentation and examples about initialization steps can be found [here](./REFERENCE_API.md).
 
-### Usage
+### How to use
 
 #### Reactotron
 
@@ -119,40 +118,3 @@ recordError('EVENT_NAME', { your_key: 'value' });
 ```
 
 Documentation and example about error reporting can be found [here](./REFERENCE_API.md).
-
----
-
-## Supported libraries
-
-### Firebase crashlytics
-
-Need to add `@react-native-firebase/app` and `@react-native-firebase/crashlytics` to your project and follow their documentations to setup them properly.
-
-To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `init`'s thrid parameter which take an array.
-
-`createCrashlyticsLogger` take one parameter, you have to add it `crashlytics()` from `@react-native-firebase/crashlytics`
-
-### Firebase analytics
-
-Need to add `@react-native-firebase/app` and `@react-native-firebase/analytics` to your project and follow their documentations to setup them properly.
-
-To be able to send log to firebase analytics each time when you will call our `logEvent`, you need to add `createFirebaseLogger` to our `init`'s second parameter which take an array.
-
-`createFirebaseLogger` take one parameter, you have to add it `analytics()` from `@react-native-firebase/analytics`
-
-### Sentry
-
-Need to add `@sentry/react-native` to your project and follow their documentations to setup them properly.
-
-To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `init`'s second parameter which take an array.
-
-`createSentryLogger` take two parameters, you have to add it `Sentry` from `@sentry/react-native` and sentry config object:
-```javascript
-{
-    dsn: 'YOUR_DSN',
-}
-```
-
-### Crash reporting
-
-If you decided to use the crash handler, it will catch all fatal JS errors and sent a report to libraries added to `recordErrors` during the initialization
