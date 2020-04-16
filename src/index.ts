@@ -1,5 +1,4 @@
 import { setupReactotron, setupReactotronWithRedux } from './modules/reactotron';
-import { createFirebaseLogger, createCrashlyticsLogger, createSentryLogger, createInstabugLogger } from './modules/loggers';
 import {
   logEvent,
   logDebugEvent,
@@ -8,6 +7,7 @@ import {
   logWarningEvent,
   recordError,
 } from './modules/events';
+import { createFirebaseLogger, createCrashlyticsLogger, createSentryLogger, createInstabugLogger } from './modules/loggers';
 import { init } from './modules/init';
 
 export {
