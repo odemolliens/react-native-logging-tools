@@ -1,6 +1,6 @@
 import {isSensitiveBuild, loggers, recordErrors} from '../init';
 
-export function logEvent(event: string, params: any = {}, sensitiveData: boolean) {
+export function logEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
   if (!isSensitiveBuild || !sensitiveData) {
     for (const logger of loggers) {
       logger(event, params);
@@ -8,19 +8,19 @@ export function logEvent(event: string, params: any = {}, sensitiveData: boolean
   }
 }
 
-export function logWarningEvent(event: string, params: any = {}, sensitiveData: boolean) {
+export function logWarningEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
   logEvent(`W/ ${event}`, params, sensitiveData);
 }
 
-export function logDebugEvent(event: string, params: any = {}, sensitiveData: boolean) {
+export function logDebugEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
   logEvent(`D/ ${event}`, params, sensitiveData);
 }
 
-export function logNetworkEvent(event: string, params: any = {}, sensitiveData: boolean) {
+export function logNetworkEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
   logEvent(`N/ ${event}`, params, sensitiveData);
 }
 
-export function logErrorEvent(event: string, params: any = {}, sensitiveData: boolean) {
+export function logErrorEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
   logEvent(`E/ ${event}`, params, sensitiveData);
 }
 
