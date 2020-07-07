@@ -1,4 +1,4 @@
 export interface IInstabug {
   token: string;
-  invocationEvent: any;
+  invocationEvent?: any;
 }

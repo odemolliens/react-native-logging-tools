@@ -7,11 +7,30 @@ import {
   logEvent,
   createCrashlyticsLogger,
   recordError,
+  logWarningEvent,
+  logDebugEvent,
+  logNetworkEvent,
+  logErrorEvent,
+  createInstabugLogger,
 } from '../index';
+import * as Init from '../modules/init';
 
 describe('index test suite', () => {
   const analytics = {
     logEvent: jest.fn(),
+  };
+  const instabug = {
+    startWithToken: jest.fn(),
+    logUserEventWithName: jest.fn(),
+    invocationEvent: {
+      shake: jest.fn(),
+    },
+  };
+  const instabugWrong = {
+    startWithToken: jest.fn(),
+    invocationEvent: {
+      shake: jest.fn(),
+    },
   };
   const crashlytics = {
     recordError: jest.fn(),
@@ -43,7 +62,7 @@ describe('index test suite', () => {
 
   it('should init not properly 2', () => {
     // @ts-ignore
-    init({ config: { reportJSErrors: true }, analytics: [{}], errorReporters: [{}] });
+    init({ config: { reportJSErrors: true, isSensitiveBuild: true }, analytics: [{}], errorReporters: [{}] });
   });
 
   it('should init with wrong datas', () => {
@@ -67,17 +86,53 @@ describe('index test suite', () => {
   // Firebase & Sentry
 
   it('should init properly and log event', () => {
+    givenSetSensitiveBuild(true);
     init({
       analytics: [createFirebaseLogger(analytics), createSentryLogger(sentry, { dsn: 'dsn' })],
     });
-    logEvent('event', { key: 'value' });
+    logEvent('event', { key: 'value' }, true);
   });
 
   it('should init properly and log without param', () => {
+    givenSetSensitiveBuild(false);
     init({
       analytics: [createFirebaseLogger(analytics), createSentryLogger(sentry, { dsn: 'dsn' })],
     });
     logEvent('event');
+    logWarningEvent('event');
+    logDebugEvent('event');
+    logNetworkEvent('event');
+    logErrorEvent('event');
+  });
+
+  // Instabug
+
+  it('should init properly and log event', () => {
+    init({
+      analytics: [createInstabugLogger(instabug, { invocationEvent: 'shake', token: 'token' })],
+    });
+    logEvent('event', { key: 'value' }, true);
+  });
+
+  it('should init properly and log event without invocationEvent', () => {
+    init({
+      analytics: [createInstabugLogger(instabug, { token: 'token' })],
+    });
+    logEvent('event', { key: 'value' }, true);
+  });
+
+  it('should init not properly', () => {
+    init({
+      analytics: [createInstabugLogger(instabugWrong, { token: 'token' }, true)],
+    });
+    logEvent('event', { key: 'value' }, true);
+  });
+
+  it('should init not properly', () => {
+    init({
+      analytics: [createInstabugLogger(instabugWrong, { token: 'token' })],
+    });
+    logEvent('event', { key: 'value' }, true);
   });
 
   // Crashlytics
@@ -101,4 +156,9 @@ describe('index test suite', () => {
     init({ config: { Reactotron, reactotronRedux, AsyncStorage } });
     setupReactotronWithRedux('app_name');
   });
+
+  function givenSetSensitiveBuild(isSensitive: boolean = true) {
+    // @ts-ignore
+    Init.isSensitiveBuild = isSensitive;
+  }
 });
