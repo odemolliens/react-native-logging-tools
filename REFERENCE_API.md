@@ -27,7 +27,6 @@ init is an object which take three keys/values:
 
 - `config: IConfig`: IConfig is an object which takes: (optional)
   - `Reactotron`: Reactotron library from reactotron-react-native (optional) (mandatory if you want plug Reactotron to your store)
-  - `reactotronRedux`: reactotronRedux library from reactotron-redux (optional) (mandatory if you want plug reactotronRedux to your store)
   - `AsyncStorage`: from @react-native-community/async-storage ie (optional)
   - `reportJSErrors: boolean`: to set to true if you want send js crash reports (optional)
   - `isSensitiveBuild: boolean`: to set to true if you want defined some logEvent as sensitive and not send log for this one (optional)
@@ -40,7 +39,7 @@ With Reactotron Redux, Instabug, Firebase analytics, crashlytics & handle fatal 
 
 ```javascript
 init({
-  config: { Reactotron, AsyncStorage, reactotronRedux, reportJSErrors: !__DEV__ },
+  config: { Reactotron, AsyncStorage, reportJSErrors: !__DEV__ },
   analytics: [createFirebaseLogger(analytics(), true), createInstabugLogger(Instabug)],
   errorReporters: [createCrashlyticsLogger(crashlytics())],
 });
@@ -66,7 +65,8 @@ Reactotron should be already initialized in `init` function
 
 One parameter:
 
-- `appName: string`: the name of the app
+- `config: any`: the config of the reactotron (optional)
+- `plugins: Array<Function>`: plugins which will be uses with reactotron (max 3) (optional)
 
 #### Example
 
@@ -75,31 +75,7 @@ const store = createStore(
   rootReducer,
   compose(
     ...,
-    setupReactotron('APP_NAME').createEnhancer()
-  )
-);
-```
-
----
-
-### setupReactotronWithRedux
-
-To plug Reactotron and redux tools to your redux store.
-
-Reactotron and reactotronRedux should be already initialized in `init` function
-
-One parameter:
-
-- `appName: string`: the name of the app
-
-#### Example
-
-```javascript
-const store = createStore(
-  rootReducer,
-  compose(
-    ...,
-    setupReactotronWithRedux('APP_NAME').createEnhancer()
+    setupReactotron({ name: 'APP_NAME', host: '192.0.0.0' }, [reactotronRedux(), sagaPlugin({})]).createEnhancer()
   )
 );
 ```
@@ -154,8 +130,8 @@ Two parameters:
 
 - `instabug`: module from `instabug-reactnative`
 - `config`: object which take one key/value:
-    - `token: string`: your application's token
-    - `invocationEvent`: [here](https://docs.instabug.com/docs/react-native-invocation) (default: `Instabug.invocationEvent.shake`)
+  - `token: string`: your application's token
+  - `invocationEvent`: [here](https://docs.instabug.com/docs/react-native-invocation) (default: `Instabug.invocationEvent.shake`)
 - `printError: boolean`: to print or not instabug event's errors (optional)(default: false)
 
 #### Example

@@ -3,7 +3,6 @@ import setupExceptionHandler from '../../exceptionHandler';
 import { isFunction } from '../../helpers/functions';
 
 export let Reactotron: any;
-export let reactotronRedux: any;
 export let AsyncStorage: any;
 export let isSensitiveBuild: boolean;
 
@@ -14,9 +13,6 @@ export function init(initConfig: IInit): void {
   if (initConfig.config) {
     if (initConfig.config.Reactotron) {
       Reactotron = initConfig.config.Reactotron;
-    }
-    if (initConfig.config.reactotronRedux) {
-      reactotronRedux = initConfig.config.reactotronRedux;
     }
     if (initConfig.config.AsyncStorage) {
       AsyncStorage = initConfig.config.AsyncStorage;

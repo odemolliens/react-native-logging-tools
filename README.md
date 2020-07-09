@@ -79,7 +79,6 @@ init({
   config: {
     Reactotron,
     AsyncStorage,
-    reactotronRedux,
     reportJSErrors: !__DEV__,
     isSensitiveBuild: __STORE__ },
   analytics: [createFirebaseLogger(analytics(), true)],

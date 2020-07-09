@@ -2,7 +2,6 @@ import {
   init,
   createSentryLogger,
   createFirebaseLogger,
-  setupReactotronWithRedux,
   setupReactotron,
   logEvent,
   createCrashlyticsLogger,
@@ -14,6 +13,7 @@ import {
   createInstabugLogger,
 } from '../index';
 import * as Init from '../modules/init';
+import { emptyFunction } from '../modules/reactotron';
 
 describe('index test suite', () => {
   const analytics = {
@@ -149,12 +149,14 @@ describe('index test suite', () => {
 
   it('should init properly and setup reactotron', () => {
     init({ config: { Reactotron, AsyncStorage } });
-    setupReactotron('app_name');
+    emptyFunction();
+    setupReactotron();
   });
 
   it('should init properly and setup reactotron and redux', () => {
-    init({ config: { Reactotron, reactotronRedux, AsyncStorage } });
-    setupReactotronWithRedux('app_name');
+    init({ config: { Reactotron, AsyncStorage } });
+    setupReactotron(undefined, [reactotronRedux()]);
+    setupReactotron({}, [reactotronRedux(), reactotronRedux(), reactotronRedux()]);
   });
 
   function givenSetSensitiveBuild(isSensitive: boolean = true) {
