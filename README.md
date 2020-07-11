@@ -54,7 +54,6 @@ import {
   createCrashlyticsLogger,
   createSentryLogger,
   setupReactotron,
-  setupReactotronWithRedux,
   logEvent,
 } from 'react-native-logging-tools';
 ```

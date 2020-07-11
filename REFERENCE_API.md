@@ -5,7 +5,6 @@ Page containing the full index of all React Native Logging Tools reference API t
 - [API](#api)
   - [init](#init)
   - [setupReactotron](#setupreactotron)
-  - [setupReactotronWithRedux](#setupreactotronwithredux)
   - [createFirebaseLogger](#createfirebaselogger)
   - [createSentryLogger](#createsentrylogger)
   - [createCrashlyticsLogger](#createcrashlyticslogger)
