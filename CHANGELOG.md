@@ -1,6 +1,6 @@
 # Changelog
 
-### Version 1.0.1
+### Version 1.0.2
 
 - BREAKING CHANGES
     - `setupReactotron` take an object as parameter and not only a string
@@ -17,7 +17,7 @@
 
     ```javascript
     init({ config: { Reactotron, AsyncStorage } });
-    setupReactotronWithRedux({ name: 'app_name' }, [reactotronRedux(), ...otherPlugins()]);
+    setupReactotron({ name: 'app_name' }, [reactotronRedux(), ...otherPlugins()]);
     ```
     
 - News

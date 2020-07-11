@@ -1,7 +1,7 @@
 {
   "name": "react-native-logging-tools",
   "title": "React Native library created to ease logging",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "src/index.ts",
   "typings": "index.d.ts",
   "scripts": {

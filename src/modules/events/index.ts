@@ -1,4 +1,4 @@
-import {isSensitiveBuild, loggers, recordErrors} from '../init';
+import { isSensitiveBuild, loggers, recordErrors } from '../init';
 
 export function logEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
   if (!isSensitiveBuild || !sensitiveData) {
