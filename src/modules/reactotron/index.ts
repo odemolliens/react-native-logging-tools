@@ -1,27 +1,25 @@
 import { IReactotron } from '../../model';
-import { AsyncStorage, Reactotron, reactotronRedux } from '../init';
+import { AsyncStorage, Reactotron } from '../init';
 
-export function reactotron(ReactotronModule: any, asyncStorage: any, appName: string): IReactotron {
-  return ReactotronModule.configure({ name: appName }).setAsyncStorageHandler(asyncStorage).useReactNative().connect();
+export function emptyFunction() {
+  return {};
 }
 
-export function reactotronWithRedux(
+export function reactotron(
   ReactotronModule: any,
-  ReactotronRedux: any,
   asyncStorage: any,
-  appName: string,
+  config?: any,
+  plugins?: Array<Function>,
 ): IReactotron {
-  return ReactotronModule.configure({ name: appName })
+  return ReactotronModule.configure(config || { name: 'App' })
     .setAsyncStorageHandler(asyncStorage)
-    .use(ReactotronRedux())
     .useReactNative()
+    .use(plugins && plugins.length > 0 ? plugins[0] : emptyFunction)
+    .use(plugins && plugins.length > 1 ? plugins[1] : emptyFunction)
+    .use(plugins && plugins.length > 2 ? plugins[2] : emptyFunction)
     .connect();
 }
 
-export function setupReactotron(appName: string): IReactotron {
-  return reactotron(Reactotron, AsyncStorage, appName);
-}
-
-export function setupReactotronWithRedux(appName: string): IReactotron {
-  return reactotronWithRedux(Reactotron, reactotronRedux, AsyncStorage, appName);
+export function setupReactotron(config?: any, plugins?: Array<Function>): IReactotron {
+  return reactotron(Reactotron, AsyncStorage, config, plugins);
 }

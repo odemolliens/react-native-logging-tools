@@ -4,8 +4,7 @@ import { ISentry } from './src/model/sentry';
 
 declare const init: (initConfig: IInit) => void;
 
-declare const setupReactotron: (appName?: string, host?: string) => void;
-declare const setupReactotronWithRedux: (appName?: string, host?: string) => void;
+declare const setupReactotron: (config?: any, plugins?: Array<Function>) => void;
 
 declare const createFirebaseLogger: (analytics: any, printError?: boolean) => void;
 declare const createCrashlyticsLogger: (crashlytics: any, printError?: boolean) => void;
