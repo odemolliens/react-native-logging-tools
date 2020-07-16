@@ -17,11 +17,12 @@ and all this, as easily as possible
 - [Usage](#usage)
     - [Imports](#imports)
     - [Initialization](#initialization)
-    - [How to use](#how-to-use)
-        - [Reactotron](#reactotron)
+    - [Features](#features)
         - [Loggers](#loggers)
-            - [Events](#events)
-            - [Errors](#errors)
+            - [Debug Events](#debug-events)
+            - [Error Events](#error-events)
+        - [Reactotron](#reactotron)
+        - [JS Error handler](#js-error-handler)
 
 ---
 
