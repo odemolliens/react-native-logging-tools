@@ -1,3 +1,6 @@
+![npm](https://img.shields.io/npm/v/react-native-logging-tools.svg)
+![GitHub](https://img.shields.io/github/license/imranMnts/react-native-logging-tools.svg)
+
 # React Native Logging Tools
 
 A react native module that lets you:
@@ -49,19 +52,21 @@ or
 
 ### Imports
 
-To start, you have to import libraries which will be used.
+To start, you have to import methods from `react-native-logging-tools` which will be used.
 ```javascript
 import {
   init,
   createFirebaseLogger,
   createCrashlyticsLogger,
   createSentryLogger,
+  createTealiumLogger,
+  createAdobeLogger,
   setupReactotron,
   logEvent,
 } from 'react-native-logging-tools';
 ```
 
-And the others libraries which can be plugged
+And the others external libraries to plug to `react-native-logging-tools`
 ```javascript
 import Reactotron from 'reactotron-react-native';
 import { reactotronRedux } from 'reactotron-redux';
@@ -70,37 +75,33 @@ import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 import * as Sentry from "@sentry/react-native";
 import AsyncStorage from '@react-native-community/async-storage';
+import { ACPCore } from '@adobe/react-native-acpcore';
 ```
 
 ### Initialization
 
-Before any call to `react-native-logging-tools`'s features, you have to initialize it (in your `App.ts` or `store.ts` for example)
+Before any call to `react-native-logging-tools`'s features, you have to initialize it (eg. in your `App.ts` or `store.ts`)
 
 ```javascript
 init({
   config: {
-    Reactotron,
-    AsyncStorage,
     reportJSErrors: !__DEV__,
-    isSensitiveBuild: __STORE__ },
-  analytics: [createFirebaseLogger(analytics(), true)],
+  analytics: [createFirebaseLogger(analytics())],
   errorReporters: [createCrashlyticsLogger(crashlytics())],
 });
 ```
 
-Documentation and examples about initialization steps can be found [here](./REFERENCE_API.md).
+:information_source: Documentation and example about initialization steps can be found [here](./REFERENCE_API.md).
 
-### How to use
+### Features
 
 #### Reactotron
 
-```javascript
-init({
-  config: { Reactotron },
-});
-```
+:information_source: Documentation and example about Reactotron can be found [here](./REFERENCE_API.md).
 
-Documentation and example about Reactotron can be found [here](./REFERENCE_API.md).
+#### JS Error handler
+
+:information_source: Documentation and example about Reactotron can be found [here](./REFERENCE_API.md).
 
 #### Loggers
 
@@ -116,7 +117,7 @@ logNetworkEvent('EVENT_NAME', { your_key: 'value' });
 logWarningEvent('EVENT_NAME', { your_key: 'value' });
 ```
 
-Documentation and example about logging event can be found [here](./REFERENCE_API.md).
+:information_source: Documentation and example about logging event can be found [here](./REFERENCE_API.md).
 
 If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
 
@@ -128,4 +129,4 @@ You can call this function where do you want/need to send logs to each plugged l
 recordError('EVENT_NAME', { your_key: 'value' });
 ```
 
-Documentation and example about error reporting can be found [here](./REFERENCE_API.md).
+:information_source: Documentation and example about error reporting can be found [here](./REFERENCE_API.md).

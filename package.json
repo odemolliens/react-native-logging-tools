@@ -4,6 +4,7 @@
   "version": "1.1.0",
   "main": "src/index.ts",
   "typings": "index.d.ts",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "prettier:fix": "prettier --config ./.prettierrc.js --write --check \"src/**/*.ts\" ",
     "lint:fix": "tslint -p tsconfig.json --fix 'src/**/*.tsx' 'src/**/*.ts'",
