@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/imranMnts/react-native-logging-tools.svg?branch=develop)](https://travis-ci.org/imranMnts/react-native-logging-tools)
 ![npm](https://img.shields.io/npm/v/react-native-logging-tools.svg)
 ![GitHub](https://img.shields.io/github/license/imranMnts/react-native-logging-tools.svg)
 
