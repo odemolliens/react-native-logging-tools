@@ -433,7 +433,7 @@ Need to add `@react-native-firebase/app` and `@react-native-firebase/crashlytics
 
 To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `init` function's `errorReporters` array.
 
-Please refer to `createCrashlyticsLogger` to know how to init it
+:information_source: Please refer to `createCrashlyticsLogger` to know how to init it
 
 #### Firebase analytics
 
@@ -441,7 +441,7 @@ Need to add `@react-native-firebase/app` and `@react-native-firebase/analytics` 
 
 To be able to send log to firebase analytics each time when you will call our `logEvent`, you need to add `createFirebaseLogger` to our `init` function's `analytics` array.
 
-Please refer to `createFirebaseLogger` to know how to init it
+:information_source: Please refer to `createFirebaseLogger` to know how to init it
 
 #### Sentry
 
@@ -449,7 +449,7 @@ Need to add `@sentry/react-native` to your project and follow their documentatio
 
 To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `init` function's `analytics` array.
 
-Please refer to `createSentryLogger` to know how to init it
+:information_source: Please refer to `createSentryLogger` to know how to init it
 
 #### Instabug
 
@@ -457,7 +457,7 @@ Need to add `instabug-reactnative` to your project and follow their documentatio
 
 To be able to send log to instabug each time when you will call our `logEvent`, you need to add `createInstabugLogger` to our `init` function's `analytics` array.
 
-Please refer to `createInstabugLogger` to know how to init it
+:information_source: Please refer to `createInstabugLogger` to know how to init it
 
 #### Adobe
 
@@ -465,7 +465,7 @@ Need to add `@adobe/react-native-acpcore` and `@adobe/react-native-acpanalytics`
 
 To be able to send log to adobe each time when you will call our `logEvent`, you need to add `createAdobeLogger` to our `init` function's `analytics` array.
 
-Please refer to `createAdobeLogger` to know how to init it
+:information_source: Please refer to `createAdobeLogger` to know how to init it
 
 #### Tealium
 
@@ -473,7 +473,7 @@ Need to add `tealium-react-native` to your project and follow their documentatio
 
 To be able to send log to instabug each time when you will call our `logEvent`, you need to add `createTealiumLogger` to our `init` function's `analytics` array.
 
-Please refer to `createTealiumLogger` to know how to init it
+:information_source: Please refer to `createTealiumLogger` to know how to init it
 
 #### Crash reporting
 
