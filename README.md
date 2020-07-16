@@ -97,6 +97,35 @@ init({
 
 ### Features
 
+#### Loggers
+
+##### Debug Events
+
+You can call this function where do you want/need to send logs to each plugged libraries to `analytics` during the initialization step
+
+```javascript
+logEvent('EVENT_NAME', { your_key: 'value', ... });
+logDebugEvent('EVENT_NAME', { your_key: 'value', ... });
+logWarningEvent('EVENT_NAME', { your_key: 'value', ... });
+logNetworkEvent('EVENT_NAME', { your_key: 'value', ... });
+logErrorEvent('EVENT_NAME', { your_key: 'value', ... });
+```
+
+:information_source: Documentation and example about logging event can be found [here](./REFERENCE_API.md).
+
+If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
+
+
+##### Error Events
+
+You can call this function where do you want/need to send logs to each plugged libraries to `errorReporters` during the initialization step
+
+```javascript
+recordError('EVENT_NAME', { your_key: 'value', ... });
+```
+
+:information_source: Documentation and example about error reporting can be found [here](./REFERENCE_API.md).
+
 #### Reactotron
 
 :information_source: Documentation and example about Reactotron can be found [here](./REFERENCE_API.md).
@@ -104,31 +133,3 @@ init({
 #### JS Error handler
 
 :information_source: Documentation and example about Reactotron can be found [here](./REFERENCE_API.md).
-
-#### Loggers
-
-##### Events
-
-You can call this function where do you want/need to send logs to each plugged libraries to `analytics` during the initialization step
-
-```javascript
-logEvent('EVENT_NAME', { your_key: 'value' });
-logDebugEvent('EVENT_NAME', { your_key: 'value' });
-logErrorEvent('EVENT_NAME', { your_key: 'value' });
-logNetworkEvent('EVENT_NAME', { your_key: 'value' });
-logWarningEvent('EVENT_NAME', { your_key: 'value' });
-```
-
-:information_source: Documentation and example about logging event can be found [here](./REFERENCE_API.md).
-
-If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
-
-##### Errors
-
-You can call this function where do you want/need to send logs to each plugged libraries to `errorReporters` during the initialization step
-
-```javascript
-recordError('EVENT_NAME', { your_key: 'value' });
-```
-
-:information_source: Documentation and example about error reporting can be found [here](./REFERENCE_API.md).
