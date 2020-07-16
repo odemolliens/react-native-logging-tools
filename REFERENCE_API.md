@@ -87,7 +87,7 @@ To plug Firebase analytics to send event later.
 
 Two parameters:
 
-- `analytics()`: function from `@react-native-firebase/analytics`
+- `analytics()`: analytics() function from `@react-native-firebase/analytics`
 - `printError: boolean`: to print or not firebase event's errors (optional)(default: false)
 
 #### Example
@@ -106,7 +106,7 @@ To plug Sentry to send event later.
 
 Two parameters:
 
-- `sentry`: module from `@sentry/react-native`
+- `sentry`: Sentry module from `@sentry/react-native`
 - `config`: object which take one key/value:
   - `dsn: string`: project DSN, to take from Sentry dashboard
 - `printError: boolean`: to print or not sentry event's errors (optional)(default: false)
@@ -115,7 +115,7 @@ Two parameters:
 
 ```javascript
 init({
-  analytics: [createSentryLogger(sentry, { dsn: 'dsn' }, true)],
+  analytics: [createSentryLogger(Sentry, { dsn: 'dsn' }, true)],
 });
 ```
 
@@ -127,7 +127,7 @@ To plug Instabug to send event later.
 
 Two parameters:
 
-- `instabug`: module from `instabug-reactnative`
+- `instabug`: Instabug module from `instabug-reactnative`
 - `config`: object which take one key/value:
   - `token: string`: your application's token
   - `invocationEvent`: [here](https://docs.instabug.com/docs/react-native-invocation) (default: `Instabug.invocationEvent.shake`)
@@ -137,7 +137,56 @@ Two parameters:
 
 ```javascript
 init({
-  analytics: [createInstabugLogger(instabug, { token: 'APP_TOKEN', invocationEvent: 'invocationEvent' }, true)],
+  analytics: [createInstabugLogger(Instabug, { token: 'APP_TOKEN', invocationEvent: 'invocationEvent' }, true)],
+});
+```
+
+---
+
+### createTealiumLogger
+
+To plug Tealium to send event later.
+
+Two parameters:
+
+- `tealium`: Tealium module from `tealium-react-native`
+- `config`: object which take keys/values: [Official doc](https://docs.tealium.com/platforms/react-native/api/#initialize)
+  - `account: string`: Tealium account name
+  - `profile: string`: Tealium profile name
+  - `environment: string`: Tealium environment name
+  - `iosDatasource: string`: Tealium iOS data source key (optional)
+  - `androidDatasource: string`: Tealium Android data source key (optional)
+  - `instance: boolean`: Tealium instance name (optional)(default: "MAIN")
+  - `isLifecycleEnabled: boolean`: To enable lifecycle tracking (optional)(default: true)
+- `printError: boolean`: to print or not firebase event's errors (optional)(default: false)
+
+#### Example
+
+```javascript
+init({
+  analytics: [
+    createTealiumLogger(Tealium, { account: 'accountName', profile: 'profileName', environment: 'environment' }, true),
+  ],
+});
+```
+
+---
+
+### createAdobeLogger
+
+To plug Adobe to send event later.
+
+Two parameters:
+
+- `adobeAnalytics`: ACPAnalytics module from `@adobe/react-native-acpanalytics`
+- `adobeLogger`: ACPCore module from `@adobe/react-native-acpcore`
+- `printError: boolean`: to print or not firebase event's errors (optional)(default: false)
+
+#### Example
+
+```javascript
+init({
+  analytics: [createAdobeLogger(ACPAnalytics, ACPCore, true)],
 });
 ```
 
@@ -149,14 +198,14 @@ To plug Firebase crashlytics to send event later.
 
 Two parameters:
 
-- `crashlytics()`: function from `@react-native-firebase/crashlytics`
+- `crashlytics()`: crashlytics() function from `@react-native-firebase/crashlytics`
 - `printError: boolean`: to print or not firebase event's errors (optional)(default: false)
 
 #### Example
 
 ```javascript
 init({
-  analytics: [createCrashlyticsLogger(crashlytics(), true)],
+  errorReporters: [createCrashlyticsLogger(crashlytics(), true)],
 });
 ```
 

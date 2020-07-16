@@ -39,6 +39,9 @@ or
 |@react-native-firebase/crashlytics|:white_check_mark:| \>= 6.0.0
 |@sentry/react-native|:white_check_mark:| \>= 1.3.0
 |instabug-reactnative|:white_check_mark:| \>= 9.0.0
+|@adobe/react-native-acpanalytics|:white_check_mark:| \>= 1.1.6
+|@adobe/react-native-acpcore|:white_check_mark:| \>= 1.2.4
+|tealium-react-native|:white_check_mark:| \>= 1.0.10
 
 ---
 

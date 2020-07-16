@@ -8,6 +8,8 @@ import {
   recordError,
 } from './modules/events';
 import {
+  createTealiumLogger,
+  createAdobeLogger,
   createFirebaseLogger,
   createCrashlyticsLogger,
   createSentryLogger,
@@ -20,6 +22,8 @@ export {
   createSentryLogger,
   createCrashlyticsLogger,
   createInstabugLogger,
+  createTealiumLogger,
+  createAdobeLogger,
   setupReactotron,
   init,
   logEvent,
