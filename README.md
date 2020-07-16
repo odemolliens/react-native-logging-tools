@@ -87,6 +87,7 @@ Before any call to `react-native-logging-tools`'s features, you have to initiali
 init({
   config: {
     reportJSErrors: !__DEV__,
+  },
   analytics: [createFirebaseLogger(analytics())],
   errorReporters: [createCrashlyticsLogger(crashlytics())],
 });
