@@ -5,9 +5,9 @@
 - News
     - Support Adobe and Tealium
     - Can exclude service by message type, if we don't want to send each message type to each service (eg. network error..) 
-    - Increase reactotron plugin limit to 5
+    - Increase reactotron plugin's limit to 5
 - BugFixes
-    - improve support of typescript
+    - improve the support of typescript
 
 ### Version 1.0.2
 
