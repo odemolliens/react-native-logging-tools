@@ -13,10 +13,12 @@ import {
   logNetworkEvent,
   logErrorEvent,
   createInstabugLogger,
+  DEBUG_LOG,
 } from '../index';
 import * as Init from '../modules/init';
-import { emptyFunction } from '../modules/reactotron';
 import { ITealium } from '../model/tealium';
+import { log } from '../modules/events';
+import { excludeLogs, loggers } from '../modules/init';
 
 describe('index test suite', () => {
   const analytics = {
@@ -67,22 +69,60 @@ describe('index test suite', () => {
     createEnhancer: () => Reactotron,
   };
 
-  it('should init properly', () => {
-    init({});
+  beforeEach(() => {
+    jest.resetAllMocks();
   });
 
-  it('should init not properly', () => {
+  it('should init properly empty', () => {
+    init({});
+    expect(loggers).toEqual([]);
+  });
+
+  it('should init properly', () => {
     init({ config: {}, analytics: [], errorReporters: [] });
+    expect(loggers).toEqual([]);
+  });
+
+  it('should init properly with wrong analytics and errorReporters', () => {
+    // @ts-ignore
+    init({ config: {}, analytics: [{}], errorReporters: [{}] });
+    expect(loggers).toEqual([]);
+  });
+
+  it('should init properly and log event with reject', () => {
+    init({
+      config: {
+        excludeLogs: {
+          instabug: [DEBUG_LOG],
+          tealium: [DEBUG_LOG],
+          adobe: [DEBUG_LOG],
+          firebase: [DEBUG_LOG],
+          sentry: [DEBUG_LOG],
+          crashlytics: [DEBUG_LOG],
+        },
+      },
+      analytics: [
+        createInstabugLogger(instabug, { invocationEvent: 'shake', token: 'token' }),
+        createTealiumLogger(Tealium, configTealium),
+        createAdobeLogger(ACPAnalytics, ACPCore),
+        createFirebaseLogger({}),
+        createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' }),
+        createCrashlyticsLogger(crashlytics),
+      ],
+    });
+    logDebugEvent('event');
   });
 
   it('should init not properly 2', () => {
-    // @ts-ignore
-    init({ config: { reportJSErrors: true, isSensitiveBuild: true }, analytics: [{}], errorReporters: [{}] });
+    init({
+      config: { reportJSErrors: true, isSensitiveBuild: true, excludeLogs: { instabug: [DEBUG_LOG] } },
+    });
+    expect(excludeLogs).toEqual({ instabug: [DEBUG_LOG] });
   });
 
   // Firebase & Sentry
 
-  it('should init with wrong datas', () => {
+  it('should init Firebase & Sentry with wrong datas + printLogs', () => {
     init({
       analytics: [createFirebaseLogger({}, true), createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' }, true)],
       errorReporters: [createCrashlyticsLogger({}, true)],
@@ -91,7 +131,7 @@ describe('index test suite', () => {
     recordError('error', { key: 'value' });
   });
 
-  it('should init with wrong datas', () => {
+  it('should init Firebase & Sentry with wrong datas', () => {
     init({
       analytics: [createFirebaseLogger({}), createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' })],
       errorReporters: [createCrashlyticsLogger({})],
@@ -122,7 +162,7 @@ describe('index test suite', () => {
 
   // Tealium & Adobe
 
-  it('should init with wrong datas', () => {
+  it('should init Tealium & Adobe with wrong datas + printLogs', () => {
     init({
       analytics: [
         createTealiumLogger({ initialize: jest.fn() }, configTealium, true),
@@ -134,7 +174,7 @@ describe('index test suite', () => {
     recordError('error', { key: 'value' });
   });
 
-  it('should init with wrong datas', () => {
+  it('should init Tealium & Adobe with wrong datas', () => {
     init({
       analytics: [
         createTealiumLogger({ initialize: jest.fn() }, configTealium),
@@ -151,21 +191,15 @@ describe('index test suite', () => {
   it('should init properly and log event', () => {
     givenSetSensitiveBuild(true);
     init({
-      analytics: [
-        createTealiumLogger(Tealium, configTealium),
-        createAdobeLogger(ACPAnalytics, ACPCore),
-      ],
+      analytics: [createTealiumLogger(Tealium, configTealium), createAdobeLogger(ACPAnalytics, ACPCore)],
     });
-    logEvent('event', { key: 'value' }, true);
+    log('event', -1);
   });
 
   it('should init properly and log without param', () => {
     givenSetSensitiveBuild(false);
     init({
-      analytics: [
-        createTealiumLogger(Tealium, configTealium),
-        createAdobeLogger(ACPAnalytics, ACPCore),
-      ],
+      analytics: [createTealiumLogger(Tealium, configTealium), createAdobeLogger(ACPAnalytics, ACPCore)],
     });
     logEvent('event');
     logWarningEvent('event');
@@ -175,29 +209,21 @@ describe('index test suite', () => {
   });
 
   // Instabug
-
-  it('should init properly and log event', () => {
-    init({
-      analytics: [createInstabugLogger(instabug, { invocationEvent: 'shake', token: 'token' })],
-    });
-    logEvent('event', { key: 'value' }, true);
-  });
-
-  it('should init properly and log event without invocationEvent', () => {
+  it('should init Instabug properly and log event without invocationEvent', () => {
     init({
       analytics: [createInstabugLogger(instabug, { token: 'token' })],
     });
     logEvent('event', { key: 'value' }, true);
   });
 
-  it('should init not properly', () => {
+  it('should init Instabug not properly + printLogs', () => {
     init({
       analytics: [createInstabugLogger(instabugWrong, { token: 'token' }, true)],
     });
     logEvent('event', { key: 'value' }, true);
   });
 
-  it('should init not properly', () => {
+  it('should init Instabug not properly', () => {
     init({
       analytics: [createInstabugLogger(instabugWrong, { token: 'token' })],
     });
@@ -214,18 +240,6 @@ describe('index test suite', () => {
   it('should init properly and record error without param', () => {
     init({ config: { reportJSErrors: true }, errorReporters: [createCrashlyticsLogger(crashlytics)] });
     recordError('error');
-  });
-
-  it('should init properly and setup reactotron', () => {
-    init({ config: { Reactotron, AsyncStorage } });
-    emptyFunction();
-    setupReactotron();
-  });
-
-  it('should init properly and setup reactotron and redux', () => {
-    init({ config: { Reactotron, AsyncStorage } });
-    setupReactotron(undefined, [reactotronRedux()]);
-    setupReactotron({}, [reactotronRedux(), reactotronRedux(), reactotronRedux()]);
   });
 
   function givenSetSensitiveBuild(isSensitive: boolean = true) {

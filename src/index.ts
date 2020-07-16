@@ -15,7 +15,7 @@ import {
   createSentryLogger,
   createInstabugLogger,
 } from './modules/loggers';
-import { init } from './modules/init';
+import { init, DEBUG_LOG, WARNING_LOG, ERROR_LOG, NETWORK_LOG } from './modules/init';
 
 export {
   createFirebaseLogger,
@@ -32,4 +32,8 @@ export {
   logNetworkEvent,
   logWarningEvent,
   recordError,
+  DEBUG_LOG,
+  WARNING_LOG,
+  ERROR_LOG,
+  NETWORK_LOG,
 };

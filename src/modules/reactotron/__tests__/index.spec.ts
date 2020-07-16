@@ -1,5 +1,5 @@
-import { init, setupReactotron } from '../../index';
-import { emptyFunction } from '../reactotron';
+import { init, setupReactotron } from '../../../index';
+import { emptyFunction } from '../index';
 
 describe('reactotron test suite', () => {
   const AsyncStorage = jest.fn();
@@ -22,6 +22,12 @@ describe('reactotron test suite', () => {
   it('should init properly and setup reactotron and redux', () => {
     init({ config: { Reactotron, AsyncStorage } });
     setupReactotron(undefined, [reactotronRedux()]);
-    setupReactotron({}, [reactotronRedux(), reactotronRedux(), reactotronRedux()]);
+    setupReactotron({}, [
+      reactotronRedux(),
+      reactotronRedux(),
+      reactotronRedux(),
+      reactotronRedux(),
+      reactotronRedux(),
+    ]);
   });
 });
