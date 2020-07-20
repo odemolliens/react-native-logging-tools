@@ -1,9 +1,10 @@
 {
   "name": "react-native-logging-tools",
   "title": "React Native library created to ease logging",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "src/index.ts",
   "typings": "index.d.ts",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "prettier:fix": "prettier --config ./.prettierrc.js --write --check \"src/**/*.ts\" ",
     "lint:fix": "tslint -p tsconfig.json --fix 'src/**/*.tsx' 'src/**/*.ts'",
@@ -33,6 +34,8 @@
   },
   "homepage": "https://github.com/imranMnts/react-native-logging-tools#readme",
   "peerDependencies": {
+    "@adobe/react-native-acpcore": ">=1.2.4",
+    "@adobe/react-native-acpanalytics": ">=1.1.6",
     "@react-native-firebase/analytics": ">=6.0.0",
     "@react-native-firebase/app": ">=6.0.0",
     "@react-native-firebase/crashlytics": ">=6.0.0",
@@ -41,7 +44,8 @@
     "react": "^16.8.1",
     "react-native": ">=0.60.0-rc.0 <1.0.x",
     "reactotron-react-native": ">=4.0.0",
-    "reactotron-redux": ">=3.0.0"
+    "reactotron-redux": ">=3.0.0",
+    "tealium-react-native": ">=1.0.10"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.8.3",
@@ -50,9 +54,9 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",
     "jest": "^25.1.0",
-    "react": "^16.9.0",
+    "react": "16.13.1",
     "react-dom": "^16.13.0",
-    "react-native": "^0.61.5",
+    "react-native": "0.63.0",
     "reactotron-react-native": "4.0.2",
     "reactotron-redux": "^3.1.2",
     "ts-jest": "^25.0.0",

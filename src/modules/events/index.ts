@@ -1,27 +1,31 @@
-import { isSensitiveBuild, loggers, recordErrors } from '../init';
+import { DEBUG_LOG, ERROR_LOG, isSensitiveBuild, loggers, NETWORK_LOG, recordErrors, WARNING_LOG } from '../init';
 
-export function logEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
+export function log(event: string, eventType: number, params: any = {}, sensitiveData: boolean = false) {
   if (!isSensitiveBuild || !sensitiveData) {
     for (const logger of loggers) {
-      logger(event, params);
+      logger(event, params, eventType);
     }
   }
 }
 
-export function logWarningEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
-  logEvent(`W/ ${event}`, params, sensitiveData);
+export function logEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
+  log(event, -1, params, sensitiveData);
 }
 
 export function logDebugEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
-  logEvent(`D/ ${event}`, params, sensitiveData);
+  log(`D/ ${event}`, DEBUG_LOG, params, sensitiveData);
+}
+
+export function logWarningEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
+  log(`W/ ${event}`, WARNING_LOG, params, sensitiveData);
 }
 
 export function logNetworkEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
-  logEvent(`N/ ${event}`, params, sensitiveData);
+  log(`N/ ${event}`, NETWORK_LOG, params, sensitiveData);
 }
 
 export function logErrorEvent(event: string, params: any = {}, sensitiveData: boolean = false) {
-  logEvent(`E/ ${event}`, params, sensitiveData);
+  log(`E/ ${event}`, ERROR_LOG, params, sensitiveData);
 }
 
 export function recordError(event: string, params: any = {}) {

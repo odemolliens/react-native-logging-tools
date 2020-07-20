@@ -1,5 +1,14 @@
 # Changelog
 
+### Version 1.1.0
+    
+- News
+    - Support Adobe and Tealium
+    - Can exclude service by message type, if we don't want to send each message type to each service (eg. network error..) 
+    - Increase reactotron plugin's limit to 5
+- BugFixes
+    - improve the support of typescript
+
 ### Version 1.0.2
 
 - BREAKING CHANGES
