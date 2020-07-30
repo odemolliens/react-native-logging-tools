@@ -13,4 +13,5 @@ export interface IConfig {
   reportJSErrors?: boolean;
   isSensitiveBuild?: boolean;
   excludeLogs?: IExcludeLogs;
+  useFlipperPlugin?: boolean;
 }

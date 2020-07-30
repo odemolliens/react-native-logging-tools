@@ -4,7 +4,6 @@ import {
   createFirebaseLogger,
   createAdobeLogger,
   createTealiumLogger,
-  setupReactotron,
   logEvent,
   createCrashlyticsLogger,
   recordError,
@@ -58,8 +57,6 @@ describe('index test suite', () => {
   };
   const configTealium: ITealium = { account: 'accountName', profile: 'profileName', environment: 'environment' };
 
-  const AsyncStorage = jest.fn();
-  const reactotronRedux = jest.fn();
   const Reactotron = {
     configure: () => Reactotron,
     setAsyncStorageHandler: () => Reactotron,
@@ -92,6 +89,7 @@ describe('index test suite', () => {
   it('should init properly and log event with reject', () => {
     init({
       config: {
+        useFlipperPlugin: true,
         excludeLogs: {
           instabug: [DEBUG_LOG],
           tealium: [DEBUG_LOG],
@@ -105,17 +103,23 @@ describe('index test suite', () => {
         createInstabugLogger(instabug, { invocationEvent: 'shake', token: 'token' }),
         createTealiumLogger(Tealium, configTealium),
         createAdobeLogger(ACPAnalytics, ACPCore),
-        createFirebaseLogger({}),
-        createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' }),
+        createFirebaseLogger(analytics),
+        createSentryLogger(sentry, { dsn: 'dsn' }),
         createCrashlyticsLogger(crashlytics),
       ],
     });
     logDebugEvent('event');
+    logWarningEvent('event');
   });
 
   it('should init not properly 2', () => {
     init({
-      config: { reportJSErrors: true, isSensitiveBuild: true, excludeLogs: { instabug: [DEBUG_LOG] } },
+      config: {
+        reportJSErrors: true,
+        isSensitiveBuild: true,
+        useFlipperPlugin: true,
+        excludeLogs: { instabug: [DEBUG_LOG] },
+      },
     });
     expect(excludeLogs).toEqual({ instabug: [DEBUG_LOG] });
   });
@@ -240,6 +244,11 @@ describe('index test suite', () => {
   it('should init properly and record error without param', () => {
     init({ config: { reportJSErrors: true }, errorReporters: [createCrashlyticsLogger(crashlytics)] });
     recordError('error');
+  });
+
+  it('should init properly and record error without flipper', () => {
+    init({ config: { reportJSErrors: true }, errorReporters: [createCrashlyticsLogger(crashlytics)] });
+    recordError('error', { key: 'value' });
   });
 
   function givenSetSensitiveBuild(isSensitive: boolean = true) {
