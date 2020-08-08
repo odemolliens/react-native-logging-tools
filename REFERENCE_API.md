@@ -19,14 +19,18 @@ Page containing the full index of all React Native Logging Tools reference API t
     - [logNetworkEvent](#lognetworkevent)
     - [logErrorEvent](#logerrorevent)
     - [recordError](#recorderror)
+- [Flipper](#flipper)
 - [Supported libraries](#supported-libraries)
   - [Firebase crashlytics](#firebase-crashlytics)
   - [Firebase analytics](#firebase-analytics)
   - [Sentry](#sentry)
+  - [Instabug](#instabug)
+  - [Adobe](#adobe)
+  - [Tealium](#tealium)
 
 ## API
 
-### init
+### <a name="init">init</a>
 
 Library initializer, to be used before anything
 
@@ -38,6 +42,7 @@ init is an object which take three keys/values:
   - `AsyncStorage`: from @react-native-community/async-storage ie (optional)
   - `reportJSErrors: boolean`: set to true if you want turn on automatic fetch and send js crash to `errorReporters` (optional)
   - `isSensitiveBuild: boolean`: set to true if you want defined some logEvent as sensitive and not send log for this one (optional)
+  - `useFlipperPlugin: boolean`: set to true if you want use flipper plugin [More details](#flipper)  (optional)
   - `excludeLogs: object`: to exclude log types to not send to libraries which have been set (optional)       
        
         - `adobe: Array<number>`: add to an array, the log types which should *NOT* sent to adobe (optional)
@@ -76,7 +81,7 @@ init({
 
 ---
 
-### setupReactotron
+### <a name="setupReactotron">setupReactotron</a>
 
 To plug Reactotron to your redux store.
 
@@ -112,7 +117,7 @@ const store = createStore(
 
 ---
 
-### createFirebaseLogger
+### <a name="createFirebaseLogger">createFirebaseLogger</a>
 
 To plug Firebase analytics to send event later.
 
@@ -131,7 +136,7 @@ init({
 
 ---
 
-### createSentryLogger
+### <a name="createSentryLogger">createSentryLogger</a>
 
 To plug Sentry to send event later.
 
@@ -152,7 +157,7 @@ init({
 
 ---
 
-### createInstabugLogger
+### <a name="createInstabugLogger">createInstabugLogger</a>
 
 To plug Instabug to send event later.
 
@@ -174,7 +179,7 @@ init({
 
 ---
 
-### createTealiumLogger
+### <a name="createTealiumLogger">createTealiumLogger</a>
 
 To plug Tealium to send event later.
 
@@ -203,7 +208,7 @@ init({
 
 ---
 
-### createAdobeLogger
+### <a name="createAdobeLogger">createAdobeLogger</a>
 
 To plug Adobe to send event later.
 
@@ -223,7 +228,7 @@ init({
 
 ---
 
-### createCrashlyticsLogger
+### <a name="createCrashlyticsLogger">createCrashlyticsLogger</a>
 
 To plug Firebase crashlytics to send event later.
 
@@ -242,7 +247,7 @@ init({
 
 ---
 
-### logEvent
+### <a name="logEvent">logEvent</a>
 
 To send an event to analytics services
 
@@ -260,7 +265,7 @@ logEvent('EVENT_NAME', { your_key: 'value' }, true);
 
 ---
 
-### logDebugEvent
+### <a name="logDebugEvent">logDebugEvent</a>
 
 To send an event to analytics services, it's the same as `logEvent` but it will
  - Automatically prefix the event name with `D/` to facilitate the reading
@@ -299,7 +304,7 @@ logDebugEvent('EVENT_NAME', { your_key: 'value' }, true);
 
 ---
 
-### logWarningEvent
+### <a name="logWarningEvent">logWarningEvent</a>
 
 To send an event to analytics services, it's the same as `logEvent` but it will:
  - Automatically prefix the event name with `W/` to facilitate the reading
@@ -340,7 +345,7 @@ logWarningEvent('EVENT_NAME', { your_key: 'value' }, true);
 
 ---
 
-### logNetworkEvent
+### <a name="logNetworkEvent">logNetworkEvent</a>
 
 To send an event to analytics services, it's the same as `logEvent` but it will:
  - Automatically prefix the event name with `N/` to facilitate the reading
@@ -379,7 +384,7 @@ logNetworkEvent('EVENT_NAME', { your_key: 'value' }, true);
 
 ---
 
-### logErrorEvent
+### <a name="logErrorEvent">logErrorEvent</a>
 
 To send an event to analytics services, it's the same as `logEvent` but it will:
  - Automatically prefix the event name with `E/` to facilitate the reading
@@ -417,7 +422,7 @@ logErrorEvent('EVENT_NAME', { your_key: 'value' }, true);
 
 ---
 
-### recordError
+### <a name="recordError">recordError</a>
 
 To send an error report to error reporter services
 
@@ -433,6 +438,11 @@ recordError('EVENT_NAME', { your_key: 'value' });
 ```
 
 ---
+
+### <a name="flipper">Flipper</a>
+
+You can display all events sent to different service on Flipper desktop app.
+Follow plugin's documentation to install it [link](https://github.com/imranMnts/flipper-plugin-react-native-logging-tools) and set `useFlipperPlugin` to true during initialization to be able to use it.
 
 ### Supported libraries
 

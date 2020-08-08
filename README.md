@@ -9,6 +9,7 @@ A react native module that lets you:
  - Send logs to multiple services in one time
  - Send crash/error reports to multiple services in one time
  - Register a global error handler which will capture fatal JS exceptions and send a report to your crash reporter libraries
+ - Can be plugged to Flipper to display all events sent to different service.
 
 and all this, as easily as possible
 
@@ -23,6 +24,7 @@ and all this, as easily as possible
             - [Error Events](#error-events)
         - [Reactotron](#reactotron)
         - [JS Error handler](#js-error-handler)
+        - [Flipper](#flipper)
 
 ---
 
@@ -94,7 +96,7 @@ init({
 });
 ```
 
-:information_source: Documentation and example about initialization steps can be found [here](./REFERENCE_API.md).
+:information_source: Documentation and example about initialization steps can be found [here](./REFERENCE_API.md#init).
 
 ### Features
 
@@ -112,7 +114,7 @@ logNetworkEvent('EVENT_NAME', { your_key: 'value', ... });
 logErrorEvent('EVENT_NAME', { your_key: 'value', ... });
 ```
 
-:information_source: Documentation and example about logging event can be found [here](./REFERENCE_API.md).
+:information_source: Documentation and example about logging event can be found [here](./REFERENCE_API.md#logEvent).
 
 If you use `react-navigation` and you want send to analytics navigation events e.g, you can add `logEvent` to his event handler [(React-navigation docs)](https://reactnavigation.org/docs/navigation-events/)
 
@@ -125,12 +127,16 @@ You can call this function where do you want/need to send logs to each plugged l
 recordError('EVENT_NAME', { your_key: 'value', ... });
 ```
 
-:information_source: Documentation and example about error reporting can be found [here](./REFERENCE_API.md).
+:information_source: Documentation and example about error reporting can be found [here](./REFERENCE_API.md#recordError).
 
 #### Reactotron
 
-:information_source: Documentation and example about Reactotron can be found [here](./REFERENCE_API.md).
+:information_source: Documentation and example about Reactotron can be found [here](./REFERENCE_API.md#setupreactotron).
 
 #### JS Error handler
 
-:information_source: Documentation and example about Reactotron can be found [here](./REFERENCE_API.md).
+:information_source: Documentation and example about Reactotron can be found [here](./REFERENCE_API.md#init).
+
+#### Flipper
+
+:information_source: Documentation about Flipper can be found [here](./REFERENCE_API.md#flipper).

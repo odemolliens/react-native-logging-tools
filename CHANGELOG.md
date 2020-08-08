@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 1.2.0
+    
+- News
+    - Can be plugged to Flipper with `flipper-plugin-react-native-logging-tools` to display all events sent to different service.
+
 ### Version 1.1.0
     
 - News
