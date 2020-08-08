@@ -140,3 +140,4 @@ recordError('EVENT_NAME', { your_key: 'value', ... });
 #### Flipper
 
 :information_source: Documentation about Flipper can be found [here](./REFERENCE_API.md#flipper).
+
