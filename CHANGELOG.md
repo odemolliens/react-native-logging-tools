@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 1.2.1
+    
+- BugFixes
+    - Fix small issue when app refreshed many times
+
 ### Version 1.2.0
     
 - News

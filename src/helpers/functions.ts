@@ -13,8 +13,6 @@ export const isFunction = (func: any) => func && typeof func === 'function';
  *
  * @return return current date and hour
  */
-export const getCurrentDateTime = (date = new Date()) => {
-  return `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-};
+export const getCurrentDateTime = (date = new Date()) =>
+  `${date.getFullYear()}-${date.getMonth() +
+    1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;

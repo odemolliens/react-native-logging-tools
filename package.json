@@ -1,11 +1,12 @@
 {
   "name": "react-native-logging-tools",
   "title": "React Native library created to ease logging",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "src/index.ts",
   "typings": "index.d.ts",
   "scripts": {
     "prettier:fix": "prettier --config ./.prettierrc.js --write --check \"src/**/*.ts\" ",
+    "lint": "tslint -p tsconfig.json 'src/**/*.tsx' 'src/**/*.ts'",
     "lint:fix": "tslint -p tsconfig.json --fix 'src/**/*.tsx' 'src/**/*.ts'",
     "precommit": "yarn run prettier:fix && yarn run lint:fix && yarn run tsc",
     "test": "TZ=UTC jest",

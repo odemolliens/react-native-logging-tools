@@ -3,7 +3,7 @@ import { getCurrentDateTime } from '../../helpers/functions';
 
 jest.mock('../../helpers/functions', () => ({
   getCurrentDateTime: jest.fn(),
-}))
+}));
 
 describe('flipper test suite', () => {
   it('should init properly flipper and send event', () => {
