@@ -17,7 +17,6 @@ import {
 import * as Init from '../modules/init';
 import { ITealium } from '../model/tealium';
 import { log } from '../modules/events';
-import { excludeLogs, loggers } from '../modules/init';
 
 describe('index test suite', () => {
   const analytics = {
@@ -72,18 +71,18 @@ describe('index test suite', () => {
 
   it('should init properly empty', () => {
     init({});
-    expect(loggers).toEqual([]);
+    expect(Init.loggers).toEqual([]);
   });
 
   it('should init properly', () => {
     init({ config: {}, analytics: [], errorReporters: [] });
-    expect(loggers).toEqual([]);
+    expect(Init.loggers).toEqual([]);
   });
 
   it('should init properly with wrong analytics and errorReporters', () => {
     // @ts-ignore
     init({ config: {}, analytics: [{}], errorReporters: [{}] });
-    expect(loggers).toEqual([]);
+    expect(Init.loggers).toEqual([]);
   });
 
   it('should init properly and log event with reject', () => {
@@ -121,7 +120,7 @@ describe('index test suite', () => {
         excludeLogs: { instabug: [DEBUG_LOG] },
       },
     });
-    expect(excludeLogs).toEqual({ instabug: [DEBUG_LOG] });
+    expect(Init.excludeLogs).toEqual({ instabug: [DEBUG_LOG] });
   });
 
   // Firebase & Sentry
