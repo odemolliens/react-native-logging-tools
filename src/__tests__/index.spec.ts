@@ -4,7 +4,6 @@ import {
   createFirebaseLogger,
   createAdobeLogger,
   createTealiumLogger,
-  setupReactotron,
   logEvent,
   createCrashlyticsLogger,
   recordError,
@@ -58,8 +57,6 @@ describe('index test suite', () => {
   };
   const configTealium: ITealium = { account: 'accountName', profile: 'profileName', environment: 'environment' };
 
-  const AsyncStorage = jest.fn();
-  const reactotronRedux = jest.fn();
   const Reactotron = {
     configure: () => Reactotron,
     setAsyncStorageHandler: () => Reactotron,

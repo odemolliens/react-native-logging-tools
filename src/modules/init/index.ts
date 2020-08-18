@@ -12,11 +12,18 @@ export let Reactotron: any;
 export let AsyncStorage: any;
 export let isSensitiveBuild: boolean;
 
-export const loggers: Function[] = [];
-export const recordErrors: Function[] = [];
+export let loggers: Function[] = [];
+export let recordErrors: Function[] = [];
 export let excludeLogs: IExcludeLogs = {};
 
+function clean() {
+  loggers = [];
+  recordErrors = [];
+}
+
 export function init(initConfig: IInit): void {
+  clean();
+
   if (initConfig.config) {
     if (initConfig.config.excludeLogs) {
       excludeLogs = initConfig.config.excludeLogs;

@@ -1,6 +1,12 @@
 # Changelog
 
 ### Version 1.1.0
+
+- BugFixes
+    - Fix small issue when app refreshed many times
+
+
+### Version 1.1.0
     
 - News
     - Support Adobe and Tealium
