@@ -1,6 +1,6 @@
 # Changelog
 
-### Version 1.1.0
+### Version 1.1.1
 
 - BugFixes
     - Fix small issue when app refreshed many times
