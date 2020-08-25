@@ -43,6 +43,7 @@ init is an object which take three keys/values:
   - `reportJSErrors: boolean`: set to true if you want turn on automatic fetch and send js crash to `errorReporters` (optional)
   - `isSensitiveBuild: boolean`: set to true if you want defined some logEvent as sensitive and not send log for this one (optional)
   - `useFlipperPlugin: boolean`: set to true if you want use flipper plugin [More details](#flipper)  (optional)
+  - `addPlugin`: addPlugin from `react-native-flipper` [More details](#flipper)  (optional) (mandatory if `useFlipperPlugin` is true)
   - `excludeLogs: object`: to exclude log types to not send to libraries which have been set (optional)       
        
         - `adobe: Array<number>`: add to an array, the log types which should *NOT* sent to adobe (optional)
@@ -74,6 +75,21 @@ Only Sentry with only Reactotron
 ```javascript
 init({
   config: { Reactotron },
+  analytics: [createSentryLogger(sentry, { dsn: 'dsn' })],
+  errorReporters: [createCrashlyticsLogger(crashlytics())],
+});
+```
+
+
+With Sentry, Reactotron and Flipper
+
+```javascript
+init({
+  config: { 
+    Reactotron,
+    useFlipperPlugin: __DEV__,
+    addPlugin: addPlugin,
+ },
   analytics: [createSentryLogger(sentry, { dsn: 'dsn' })],
   errorReporters: [createCrashlyticsLogger(crashlytics())],
 });
@@ -442,7 +458,7 @@ recordError('EVENT_NAME', { your_key: 'value' });
 ### <a name="flipper">Flipper</a>
 
 You can display all events sent to different service on Flipper desktop app.
-Follow plugin's documentation to install it [link](https://github.com/imranMnts/flipper-plugin-react-native-logging-tools) and set `useFlipperPlugin` to true during initialization to be able to use it.
+Follow plugin's documentation to install it [link](https://github.com/imranMnts/flipper-plugin-react-native-logging-tools), set `useFlipperPlugin` to true and add `addPlugin` from `react-native-flipper` during initialization to be able to use it.
 
 ### Supported libraries
 

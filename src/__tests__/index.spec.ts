@@ -19,6 +19,8 @@ import { ITealium } from '../model/tealium';
 import { log } from '../modules/events';
 
 describe('index test suite', () => {
+  const useFlipperPlugin: boolean = true;
+  const addPlugin = jest.fn();
   const analytics = {
     logEvent: jest.fn(),
   };
@@ -116,8 +118,9 @@ describe('index test suite', () => {
       config: {
         reportJSErrors: true,
         isSensitiveBuild: true,
-        useFlipperPlugin: true,
+        useFlipperPlugin,
         excludeLogs: { instabug: [DEBUG_LOG] },
+        addPlugin,
       },
     });
     expect(Init.excludeLogs).toEqual({ instabug: [DEBUG_LOG] });
@@ -134,8 +137,23 @@ describe('index test suite', () => {
     recordError('error', { key: 'value' });
   });
 
+  it('should init Firebase & Sentry with wrong datas + printLogs with sensitiveData', () => {
+    init({
+      config: {
+        isSensitiveBuild: true,
+      },
+      analytics: [createFirebaseLogger({}, true), createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' }, true)],
+      errorReporters: [createCrashlyticsLogger({}, true)],
+    });
+    logEvent('event', { key: 'value' }, true);
+    recordError('error', { key: 'value' });
+  });
+
   it('should init Firebase & Sentry with wrong datas', () => {
     init({
+      config: {
+        isSensitiveBuild: true,
+      },
       analytics: [createFirebaseLogger({}), createSentryLogger({ init: jest.fn() }, { dsn: 'dsn' })],
       errorReporters: [createCrashlyticsLogger({})],
     });

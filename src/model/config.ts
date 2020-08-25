@@ -14,4 +14,5 @@ export interface IConfig {
   isSensitiveBuild?: boolean;
   excludeLogs?: IExcludeLogs;
   useFlipperPlugin?: boolean;
+  addPlugin?: (config: any) => void;
 }

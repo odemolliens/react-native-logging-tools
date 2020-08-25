@@ -1,11 +1,12 @@
-import { addPlugin } from 'react-native-flipper';
 import { getCurrentDateTime } from '../helpers/functions';
+import { addPlugin } from '../modules/init';
 
 export default class FlipperConnectionManager {
   private flipperConnection?: any;
 
   constructor() {
-    /* istanbul ignore next */addPlugin({
+    /* tslint:disable: no-unused-expression no-unnecessary-initializer
+    /* istanbul ignore next */ addPlugin && addPlugin({
       runInBackground: () => true,
       getId() {
         return 'flipper-plugin-react-native-logging-tools';

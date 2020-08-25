@@ -11,6 +11,7 @@ export const ERROR_LOG: number = 3;
 
 export let flipperConnectionManager: any;
 export let Reactotron: any;
+export let addPlugin: ((config: any) => void) | undefined;
 export let AsyncStorage: any;
 export let isSensitiveBuild: boolean;
 
@@ -21,13 +22,19 @@ export let excludeLogs: IExcludeLogs = {};
 function clean() {
   loggers = [];
   recordErrors = [];
+  flipperConnectionManager = undefined;
+  addPlugin = undefined;
+  Reactotron = undefined;
+  AsyncStorage = undefined;
+  isSensitiveBuild = false;
 }
 
 export function init(initConfig: IInit): void {
   clean();
 
   if (initConfig.config) {
-    if (initConfig.config.useFlipperPlugin) {
+    if (initConfig.config.useFlipperPlugin && initConfig.config.addPlugin) {
+      addPlugin = initConfig.config.addPlugin;
       flipperConnectionManager = new FlipperConnectionManager();
     }
     if (initConfig.config.excludeLogs) {
