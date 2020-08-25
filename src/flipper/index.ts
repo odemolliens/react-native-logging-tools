@@ -1,19 +1,8 @@
-import { addPlugin } from 'react-native-flipper';
 import { getCurrentDateTime } from '../helpers/functions';
+import { addPlugin } from '../modules/init';
 
 export default class FlipperConnectionManager {
   private flipperConnection?: any;
-
-  constructor() {
-    /* istanbul ignore next */addPlugin({
-      runInBackground: () => true,
-      getId() {
-        return 'flipper-plugin-react-native-logging-tools';
-      },
-      onConnect: this.handleConnect,
-      onDisconnect: this.handleDisconnect,
-    });
-  }
 
   handleConnect = (connection: any) => {
     this.flipperConnection = connection;
@@ -22,6 +11,21 @@ export default class FlipperConnectionManager {
   handleDisconnect = () => {
     this.flipperConnection = undefined;
   };
+
+  public flipperConfig: any = {
+    runInBackground: () => true,
+    getId() {
+      return 'flipper-plugin-react-native-logging-tools';
+    },
+    onConnect: this.handleConnect,
+    onDisconnect: this.handleDisconnect,
+  };
+
+  constructor() {
+    if (addPlugin) {
+      addPlugin(this.flipperConfig);
+    }
+  }
 
   send(service: string, event: string, params?: any, error?: any) {
     const payload: any = {

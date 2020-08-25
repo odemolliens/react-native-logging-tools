@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 1.2.2
+    
+- BugFixes
+    - fix issue which appeared when react-native-flipper not used
+
 ### Version 1.2.1
     
 - BugFixes

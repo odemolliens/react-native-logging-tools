@@ -80,6 +80,7 @@ import crashlytics from '@react-native-firebase/crashlytics';
 import * as Sentry from "@sentry/react-native";
 import AsyncStorage from '@react-native-community/async-storage';
 import { ACPCore } from '@adobe/react-native-acpcore';
+import { addPlugin } from 'react-native-flipper';
 ```
 
 ### Initialization
