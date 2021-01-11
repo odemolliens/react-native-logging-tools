@@ -16,6 +16,7 @@ export default function setupExceptionHandler() {
           priority: 1,
           message: error.message,
           stack: error.stack,
+          uriEncodedStackTrace: encodeURIComponent(error.stack || ''),
         });
       } else {
         recordError(`Fatal JS error: ${error}`);
