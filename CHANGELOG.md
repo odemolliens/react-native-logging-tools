@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 1.2.3
+    
+- News
+    - adds a new param uriEncodedStackTrace to the list of key/values to log when there is a JS crash
+
 ### Version 1.2.2
     
 - BugFixes
