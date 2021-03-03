@@ -1,22 +1,22 @@
 import {
-  init,
-  createSentryLogger,
-  createFirebaseLogger,
   createAdobeLogger,
-  createTealiumLogger,
-  logEvent,
   createCrashlyticsLogger,
-  recordError,
-  logWarningEvent,
-  logDebugEvent,
-  logNetworkEvent,
-  logErrorEvent,
+  createFirebaseLogger,
   createInstabugLogger,
+  createSentryLogger,
+  createTealiumLogger,
   DEBUG_LOG,
+  init,
+  logDebugEvent,
+  logErrorEvent,
+  logEvent,
+  logNetworkEvent,
+  logWarningEvent,
+  recordError,
 } from '../index';
 import * as Init from '../modules/init';
-import { ITealium } from '../model/tealium';
-import { log } from '../modules/events';
+import {Collectors, Dispatchers, ITealiumConfig} from '../model/tealium';
+import {log} from '../modules/events';
 
 describe('index test suite', () => {
   const useFlipperPlugin: boolean = true;
@@ -56,7 +56,14 @@ describe('index test suite', () => {
     initialize: jest.fn(),
     trackEvent: jest.fn(),
   };
-  const configTealium: ITealium = { account: 'accountName', profile: 'profileName', environment: 'environment' };
+  const configTealium: ITealiumConfig = {
+    collectors: [Collectors.Connectivity, Collectors.DeviceData],
+    dataSource: 'datasssource',
+    dispatchers: [Dispatchers.RemoteCommands, Dispatchers.Collect],
+    account: 'accountName',
+    profile: 'profileName',
+    environment: 'dev',
+  };
 
   const Reactotron = {
     configure: () => Reactotron,

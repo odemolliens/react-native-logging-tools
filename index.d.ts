@@ -1,7 +1,7 @@
 import { IInit } from './src/model';
 import { IInstabug } from './src/model/instabug';
 import { ISentry } from './src/model/sentry';
-import {ITealium} from "./src/model/tealium";
+import { ITealiumConfig } from './src/model/tealium';
 
 declare const DEBUG_LOG: number;
 declare const WARNING_LOG: number;
@@ -12,7 +12,7 @@ declare const init: (initConfig: IInit) => void;
 
 declare const setupReactotron: (config?: any, plugins?: Array<Function>) => any;
 
-declare const createTealiumLogger: (Tealium: any, config: ITealium, printLogs?: boolean) => Function;
+declare const createTealiumLogger: (Tealium: any, config: ITealiumConfig, printLogs?: boolean) => Function;
 declare const createAdobeLogger: (ACPAnalytics: any, ACPCore: any, printLogs?: boolean) => Function;
 declare const createFirebaseLogger: (analytics: any, printLogs?: boolean) => Function;
 declare const createCrashlyticsLogger: (crashlytics: any, printLogs?: boolean) => Function;

@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 1.3.0
+    
+- BREAKING CHANGES
+    - We are not anymore supporting Tealium versions lower than 2.0.2.
+    
 ### Version 1.2.3
     
 - News
