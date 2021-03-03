@@ -61,7 +61,7 @@
     ```javascript
     Tealium.initialize(config);
     ```
-  
+
 ### Version 1.2.3
     
 - News
