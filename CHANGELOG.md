@@ -3,65 +3,8 @@
 ### Version 1.3.0
     
 - BREAKING CHANGES
-    - Tealium takes now a TealiumConfig object with different properties at initialisation. 
-
-  before:
-    ```javascript
-    {
-      account: string;
-      profile: string;
-      environment: string;
-      instance?: string;
-      isLifecycleEnabled?: boolean;
-    }
-    ```
-
-    ```javascript
-    Tealium.initialize(
-     config.account,
-     config.profile,
-     config.environment,
-     config.iosDatasource,
-     config.androidDatasource,
-     config.instance,
-     config.isLifecycleEnabled,
-   );
-    ```
-
-  now:
-
-    ```javascript
-    {
-       account: string;
-       profile: string;
-       environment: 'dev' | 'qa' | 'prod';
-       dataSource?: string;
-       collectors: [];
-       dispatchers: [];
-       customVisitorId?: string;
-       memoryReportingEnabled?: boolean;
-       overrideCollectURL?: string;
-       overrideCollectBatchURL?: string;
-       overrideCollectDomain?: string;
-       overrideLibrarySettingsURL?: string;
-       overrideTagManagementURL?: string;
-       deepLinkTrackingEnabled?: boolean;
-       qrTraceEnabled?: boolean;
-       loglevel?: 'dev' | 'qa' | 'prod' | 'silent';
-       consentLoggingEnabled?: boolean;
-       consentPolicy?: 'ccpa' | 'gdpr';
-       consentExpiry?: { time: number, unit: 'minutes' | 'hours' | 'months' | 'days' };
-       batchingEnabled?: boolean;
-       lifecycleAutotrackingEnabled?: boolean;
-       useRemoteLibrarySettings?: boolean;
-       visitorServiceEnabled?: boolean;
-    }
-    ```
-  
-    ```javascript
-    Tealium.initialize(config);
-    ```
-
+    - We are not anymore supporting Tealium versions lower than 2.0.2.
+    
 ### Version 1.2.3
     
 - News
