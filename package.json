@@ -57,7 +57,7 @@
     "jest": "^25.1.0",
     "react": "16.13.1",
     "react-dom": "^16.13.0",
-    "react-native": "0.63.0",
+    "react-native": "0.64.1",
     "react-native-flipper": "^0.50.0",
     "reactotron-react-native": "4.0.2",
     "reactotron-redux": "^3.1.2",
