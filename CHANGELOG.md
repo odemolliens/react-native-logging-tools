@@ -1,5 +1,15 @@
 # Changelog
 
+### Version 1.3.0
+    
+- BREAKING CHANGES
+    - We are not anymore supporting Tealium versions lower than 2.0.2.
+    
+### Version 1.2.3
+    
+- News
+    - adds a new param uriEncodedStackTrace to the list of key/values to log when there is a JS crash
+
 ### Version 1.2.2
     
 - BugFixes
