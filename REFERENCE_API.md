@@ -5,13 +5,14 @@ Page containing the full index of all React Native Logging Tools reference API t
 - [API](#api)
   - Initialization
     - [init](#init)
-    - [setupReactotron](#setupreactotron)
-    - [createFirebaseLogger](#createfirebaselogger)
-    - [createSentryLogger](#createsentrylogger)
-    - [createInstabugLogger](#createinstabuglogger)
-    - [createTealiumLogger](#createtealiumlogger)
     - [createAdobeLogger](#createadobelogger)
     - [createCrashlyticsLogger](#createcrashlyticslogger)
+    - [createFirebaseLogger](#createfirebaselogger)
+    - [createInstabugLogger](#createinstabuglogger)
+    - [createReactotronLogger](#createReactotronLogger)
+    - [createSentryLogger](#createsentrylogger)
+    - [createTealiumLogger](#createtealiumlogger)
+    - [setupReactotron](#setupreactotron)
   - Log events
     - [logEvent](#logevent)
     - [logDebugEvent](#logdebugevent)
@@ -21,11 +22,12 @@ Page containing the full index of all React Native Logging Tools reference API t
     - [recordError](#recorderror)
 - [Flipper](#flipper)
 - [Supported libraries](#supported-libraries)
-  - [Firebase crashlytics](#firebase-crashlytics)
-  - [Firebase analytics](#firebase-analytics)
-  - [Sentry](#sentry)
-  - [Instabug](#instabug)
   - [Adobe](#adobe)
+  - [Firebase analytics](#firebase-analytics)
+  - [Firebase crashlytics](#firebase-crashlytics)
+  - [Instabug](#instabug)
+  - [Reactotron](#reactotron)
+  - [Sentry](#sentry)
   - [Tealium](#tealium)
 
 ## API
@@ -97,133 +99,6 @@ init({
 
 ---
 
-### <a name="setupReactotron">setupReactotron</a>
-
-To plug Reactotron to your redux store.
-
-Reactotron should be already initialized in `init` function
-
-One parameter:
-
-- `config: any`: the config of the reactotron (optional)
-- `plugins: Array<Function>`: plugins which will be uses with reactotron (max 5) (optional)
-
-#### Example
-
-Minimum required in `init` to plug reactotron
-```javascript
-init({
-  config: { 
-    Reactotron,
-    ...,
-  },
-  ...,
-});
-```
-Usage
-```javascript
-const store = createStore(
-  rootReducer,
-  compose(
-    setupReactotron({ name: 'APP_NAME', host: '192.0.0.0' }, [reactotronRedux(), sagaPlugin({})]).createEnhancer()
-    ...,
-  )
-);
-```
-
----
-
-### <a name="createFirebaseLogger">createFirebaseLogger</a>
-
-To plug Firebase analytics to send event later.
-
-Two parameters:
-
-- `analytics()`: analytics() function from `@react-native-firebase/analytics`
-- `printLogs: boolean`: to print or not firebase event's errors (optional)(default: false)
-
-#### Example
-
-```javascript
-init({
-  analytics: [createFirebaseLogger(analytics(), true)],
-});
-```
-
----
-
-### <a name="createSentryLogger">createSentryLogger</a>
-
-To plug Sentry to send event later.
-
-Two parameters:
-
-- `sentry`: Sentry module from `@sentry/react-native`
-- `config`: object which take one key/value:
-  - `dsn: string`: project DSN, to take from Sentry dashboard
-- `printLogs: boolean`: to print or not sentry event's errors (optional)(default: false)
-
-#### Example
-
-```javascript
-init({
-  analytics: [createSentryLogger(Sentry, { dsn: 'dsn' }, true)],
-});
-```
-
----
-
-### <a name="createInstabugLogger">createInstabugLogger</a>
-
-To plug Instabug to send event later.
-
-Two parameters:
-
-- `instabug`: Instabug module from `instabug-reactnative`
-- `config`: object which take one key/value:
-  - `token: string`: your application's token
-  - `invocationEvent`: [here](https://docs.instabug.com/docs/react-native-invocation) (default: `Instabug.invocationEvent.shake`)
-- `printLogs: boolean`: to print or not instabug event's errors (optional)(default: false)
-
-#### Example
-
-```javascript
-init({
-  analytics: [createInstabugLogger(Instabug, { token: 'APP_TOKEN', invocationEvent: 'invocationEvent' }, true)],
-});
-```
-
----
-
-### <a name="createTealiumLogger">createTealiumLogger</a>
-
-To plug Tealium to send event later.
-
-Two parameters:
-
-- `tealium`: Tealium module from `tealium-react-native`
-- `config`: object which take keys/values: [Official doc](https://docs.tealium.com/platforms/react-native/api/#initialize)
-  - `account: string`: Tealium account name
-  - `profile: string`: Tealium profile name
-  - `environment: string`: Tealium environment name
-  - `iosDatasource: string`: Tealium iOS data source key (optional)
-  - `androidDatasource: string`: Tealium Android data source key (optional)
-  - `instance: boolean`: Tealium instance name (optional)(default: "MAIN")
-  - `isLifecycleEnabled: boolean`: To enable lifecycle tracking (optional)(default: true)
-- `printLogs: boolean`: to print or not firebase event's errors (optional)(default: false)
-
-#### Example
-
-```javascript
-init({
-  analytics: [
-    createTealiumLogger(Tealium, { account: 'accountName', profile: 'profileName', environment: 'environment' }, true),
-  ],
-});
-```
-
----
-
 ### <a name="createAdobeLogger">createAdobeLogger</a>
 
 To plug Adobe to send event later.
@@ -259,6 +134,152 @@ Two parameters:
 init({
   errorReporters: [createCrashlyticsLogger(crashlytics(), true)],
 });
+```
+
+---
+
+### <a name="createFirebaseLogger">createFirebaseLogger</a>
+
+To plug Firebase analytics to send event later.
+
+Two parameters:
+
+- `analytics()`: analytics() function from `@react-native-firebase/analytics`
+- `printLogs: boolean`: to print or not firebase event's errors (optional)(default: false)
+
+#### Example
+
+```javascript
+init({
+  analytics: [createFirebaseLogger(analytics(), true)],
+});
+```
+
+---
+
+### <a name="createInstabugLogger">createInstabugLogger</a>
+
+To plug Instabug to send event later.
+
+Two parameters:
+
+- `instabug`: Instabug module from `instabug-reactnative`
+- `config`: object which take one key/value:
+  - `token: string`: your application's token
+  - `invocationEvent`: [here](https://docs.instabug.com/docs/react-native-invocation) (default: `Instabug.invocationEvent.shake`)
+- `printLogs: boolean`: to print or not instabug event's errors (optional)(default: false)
+
+#### Example
+
+```javascript
+init({
+  analytics: [createInstabugLogger(Instabug, { token: 'APP_TOKEN', invocationEvent: 'invocationEvent' }, true)],
+});
+```
+
+---
+
+### <a name="createReactotronLogger">createReactotronLogger</a>
+
+To plug Reactotron to send event later.
+
+Two parameters:
+
+- `reactotron`: Reactotron module from `reactotron-react-native`
+- `printLogs: boolean`: to print or not reactotron event's errors (optional)(default: false)
+
+#### Example
+
+```javascript
+init({
+  analytics: [createReactotronLogger(Reactotron, true)],
+});
+```
+
+---
+
+### <a name="createSentryLogger">createSentryLogger</a>
+
+To plug Sentry to send event later.
+
+Two parameters:
+
+- `sentry`: Sentry module from `@sentry/react-native`
+- `config`: object which take one key/value:
+  - `dsn: string`: project DSN, to take from Sentry dashboard
+- `printLogs: boolean`: to print or not sentry event's errors (optional)(default: false)
+
+#### Example
+
+```javascript
+init({
+  analytics: [createSentryLogger(Sentry, { dsn: 'dsn' }, true)],
+});
+```
+
+---
+
+### <a name="createTealiumLogger">createTealiumLogger</a>
+
+To plug Tealium to send event later.
+
+Two parameters:
+
+- `tealium`: Tealium module from `tealium-react-native`
+- `config`: object which take keys/values: [Official doc](https://docs.tealium.com/platforms/react-native/api/#initialize)
+  - `account: string`: Tealium account name
+  - `profile: string`: Tealium profile name
+  - `environment: string`: Tealium environment name
+  - `iosDatasource: string`: Tealium iOS data source key (optional)
+  - `androidDatasource: string`: Tealium Android data source key (optional)
+  - `instance: boolean`: Tealium instance name (optional)(default: "MAIN")
+  - `isLifecycleEnabled: boolean`: To enable lifecycle tracking (optional)(default: true)
+- `printLogs: boolean`: to print or not firebase event's errors (optional)(default: false)
+
+#### Example
+
+```javascript
+init({
+  analytics: [
+    createTealiumLogger(Tealium, { account: 'accountName', profile: 'profileName', environment: 'environment' }, true),
+  ],
+});
+```
+
+---
+
+### <a name="setupReactotron">setupReactotron</a>
+
+To plug Reactotron to your redux store.
+
+Reactotron should be already initialized in `init` function
+
+One parameter:
+
+- `config: any`: the config of the reactotron (optional)
+- `plugins: Array<Function>`: plugins which will be uses with reactotron (max 5) (optional)
+
+#### Example
+
+Minimum required in `init` to plug reactotron
+```javascript
+init({
+  config: { 
+    Reactotron,
+    ...,
+  },
+  ...,
+});
+```
+Usage
+```javascript
+const store = createStore(
+  rootReducer,
+  compose(
+    setupReactotron({ name: 'APP_NAME', host: '192.0.0.0' }, [reactotronRedux(), sagaPlugin({})]).createEnhancer()
+    ...,
+  )
+);
 ```
 
 ---
@@ -462,13 +483,13 @@ Follow plugin's documentation to install it [link](https://github.com/imranMnts/
 
 ### Supported libraries
 
-#### Firebase crashlytics
+#### Adobe
 
-Need to add `@react-native-firebase/app` and `@react-native-firebase/crashlytics` to your project and follow their documentations to setup them properly.
+Need to add `@adobe/react-native-acpcore` and `@adobe/react-native-acpanalytics` to your project and follow their documentations to setup them properly.
 
-To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `init` function's `errorReporters` array.
+To be able to send log to adobe each time when you will call our `logEvent`, you need to add `createAdobeLogger` to our `init` function's `analytics` array.
 
-:information_source: Please refer to `createCrashlyticsLogger` to know how to init it
+:information_source: Please refer to `createAdobeLogger` to know how to init it
 
 #### Firebase analytics
 
@@ -478,13 +499,13 @@ To be able to send log to firebase analytics each time when you will call our `l
 
 :information_source: Please refer to `createFirebaseLogger` to know how to init it
 
-#### Sentry
+#### Firebase crashlytics
 
-Need to add `@sentry/react-native` to your project and follow their documentations to setup them properly.
+Need to add `@react-native-firebase/app` and `@react-native-firebase/crashlytics` to your project and follow their documentations to setup them properly.
 
-To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `init` function's `analytics` array.
+To be able to send error to firebase crashlytics each time when you will call our `recordError`, you need to add `createCrashlyticsLogger` to our `init` function's `errorReporters` array.
 
-:information_source: Please refer to `createSentryLogger` to know how to init it
+:information_source: Please refer to `createCrashlyticsLogger` to know how to init it
 
 #### Instabug
 
@@ -494,13 +515,21 @@ To be able to send log to instabug each time when you will call our `logEvent`, 
 
 :information_source: Please refer to `createInstabugLogger` to know how to init it
 
-#### Adobe
+#### Reactotron
 
-Need to add `@adobe/react-native-acpcore` and `@adobe/react-native-acpanalytics` to your project and follow their documentations to setup them properly.
+Need to add `reactotron-react-native` to your project and follow their documentations to setup them properly.
 
-To be able to send log to adobe each time when you will call our `logEvent`, you need to add `createAdobeLogger` to our `init` function's `analytics` array.
+To be able to send log to reactotron each time when you will call our `logEvent`, you need to add `createReactotronLogger` to our `init` function's `analytics` array.
 
-:information_source: Please refer to `createAdobeLogger` to know how to init it
+:information_source: Please refer to `createReactotronLogger` to know how to init it
+
+#### Sentry
+
+Need to add `@sentry/react-native` to your project and follow their documentations to setup them properly.
+
+To be able to send log to sentry each time when you will call our `logEvent`, you need to add `createSentryLogger` to our `init` function's `analytics` array.
+
+:information_source: Please refer to `createSentryLogger` to know how to init it
 
 #### Tealium
 

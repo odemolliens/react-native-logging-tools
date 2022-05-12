@@ -3,6 +3,7 @@ export interface IExcludeLogs {
   crashlytics?: Array<number>;
   firebase?: Array<number>;
   instabug?: Array<number>;
+  reactotron?: Array<number>;
   sentry?: Array<number>;
   tealium?: Array<number>;
 }
